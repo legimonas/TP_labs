@@ -1,3 +1,5 @@
+package polygons;
+
 import java.awt.*;
 
 
@@ -9,10 +11,6 @@ public class EquilateralTriangle extends Polygon {
 
 	}
 
-	public void finalize() throws Throwable {
-		super.finalize();
-	}
-
 	public void draw(Graphics g){
 
 	}
@@ -20,7 +18,6 @@ public class EquilateralTriangle extends Polygon {
 	public double getSideSize(){
 		return sideSize;
 	}
-
 
 	public void setSideSize(double size){
 		this.sideSize = size;

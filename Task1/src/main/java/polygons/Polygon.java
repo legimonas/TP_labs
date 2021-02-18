@@ -1,3 +1,7 @@
+package polygons;
+
+import figures.Figure2D;
+
 import java.awt.*;
 import java.util.List;
 
@@ -9,12 +13,8 @@ public class Polygon extends Figure2D {
 
 	}
 
-	public void finalize() throws Throwable {
-		super.finalize();
-	}
-
 	public void addPoint(Point point){
-
+		points.add(point);
 	}
 
 	public void draw(Graphics g){
@@ -22,23 +22,23 @@ public class Polygon extends Figure2D {
 	}
 
 	public Color getFillColor(){
-		return null;
+		return super.getFillColor();
 	}
 
-	public Color getPoints(){
-		return null;
+	public List<Point> getPoints(){
+		return points;
 	}
-
-	public void move(double offsetX, double offsetY){
-
+	@Override
+	public void move(int offsetX, int offsetY){
+		points.forEach(point -> point.move(offsetX,offsetY));
 	}
 
 	public void setFillColor(Color color){
 		super.setFillColor(color);
 	}
 
-	public int setPoints(List<Point> points){
-		return 0;
+	public void setPoints(List<Point> points){
+		this.points = points;
 	}
 
 }

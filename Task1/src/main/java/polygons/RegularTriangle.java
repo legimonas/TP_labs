@@ -1,3 +1,5 @@
+package polygons;
+
 import java.awt.*;
 
 public class RegularTriangle extends RegularPolygon {
@@ -5,11 +7,7 @@ public class RegularTriangle extends RegularPolygon {
 	public RegularTriangle(){
 
 	}
-
-	public void finalize() throws Throwable {
-		super.finalize();
-	}
-
+	@Override
 	public void draw(Graphics g){
 
 	}

@@ -1,3 +1,5 @@
+package oneD;
+
 import java.awt.*;
 
 public class Line extends Ray {
@@ -5,11 +7,7 @@ public class Line extends Ray {
 	public Line(){
 
 	}
-
-	public void finalize() throws Throwable {
-		super.finalize();
-	}
-
+	@Override
 	public void draw(Graphics g){
 
 	}
