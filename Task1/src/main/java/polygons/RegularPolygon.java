@@ -1,3 +1,5 @@
+package polygons;
+
 import java.awt.*;
 
 public class RegularPolygon extends Polygon {
@@ -8,26 +10,26 @@ public class RegularPolygon extends Polygon {
 
     }
 
+    @Override
     public void draw(Graphics g) {
 
     }
 
     public void setAmountOfSides(int amount) {
-		this.amountOfSides = amount;
+        this.amountOfSides = amount;
     }
 
-    public void finalize() throws Throwable {
-        super.finalize();
-    }
 
     public int getAmountOfSides() {
         return amountOfSides;
     }
 
+    @Override
     public Color getFillColor() {
         return super.getFillColor();
     }
 
+    @Override
     public void setFillColor(Color color) {
         super.setFillColor(color);
     }

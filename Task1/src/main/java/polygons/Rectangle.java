@@ -1,30 +1,29 @@
+package polygons;
+
 import java.awt.*;
 
 public class Rectangle extends Polygon {
 
 	private Point pointB;
-
+	//TODO WHAT??? WHY????
 	public Rectangle(){
 
 	}
 
-	public void finalize() throws Throwable {
-		super.finalize();
-	}
 
 	public void draw(Graphics g){
 
 	}
-
+	@Override
 	public Color getFillColor(){
-		return null;
+		return super.getFillColor();
 	}
 
 	public Point getPointB(){
 		return pointB;
 	}
-
-	public void move(double offsetX, double offsetY){
+	@Override
+	public void move(int offsetX, int offsetY){
 
 	}
 
