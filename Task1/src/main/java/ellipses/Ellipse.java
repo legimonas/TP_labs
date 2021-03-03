@@ -74,4 +74,5 @@ public class Ellipse extends Figure2D {
         return pointB;
     }
 
+
 }

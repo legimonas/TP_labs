@@ -3,6 +3,7 @@ package ellipses;
 import java.awt.*;
 
 public class Circle extends Ellipse {
+
     //Point B is unused
     //Location is center
     //Point A is some point

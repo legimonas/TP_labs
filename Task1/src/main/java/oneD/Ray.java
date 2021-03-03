@@ -12,11 +12,11 @@ public class Ray extends Section {
     private static final int A = 0;
     private static final int B = 1;
     private static final int C = 2;
-
     // Location is origin of ray
     public Ray() {
         super();
     }
+
 
     public Ray(Point location, Color lineColor, Point secondPoint) {
         super(location, lineColor, secondPoint);
@@ -130,7 +130,7 @@ public class Ray extends Section {
 
     }
 
-
+   
     public void draw(Graphics g) {
 
     }
