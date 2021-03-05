@@ -6,11 +6,16 @@ import static figures.FiguresConstants.STANDARD_COLOR;
 
 
 public abstract class Figure {
-	private Point location;
-	private Color lineColor;
+	protected Point location;
+	protected Color lineColor;
 
 	public Figure(){
 		this.location = new Point(0,0);
+		this.lineColor = STANDARD_COLOR;
+	}
+
+	public Figure(Point location){
+		this.location = location;
 		this.lineColor = STANDARD_COLOR;
 	}
 

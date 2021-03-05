@@ -14,6 +14,11 @@ public abstract class Figure2D extends Figure {
 	}
 
 	public Figure2D(Color fillColor) {
+		super(new Point(0, 0));
+		this.fillColor = fillColor;
+	}
+	public Figure2D(Color fillColor, Color borderColor){
+		super(new Point(0,0), borderColor);
 		this.fillColor = fillColor;
 	}
 

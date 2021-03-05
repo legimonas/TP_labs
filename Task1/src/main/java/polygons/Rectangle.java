@@ -4,10 +4,15 @@ import java.awt.*;
 
 public class Rectangle extends Polygon {
 
-	private Point pointB;
 	//TODO WHAT??? WHY????
-	public Rectangle(){
-
+	public Rectangle(Point pointA, Point pointB){
+		super(pointA, pointB);
+	}
+	public Rectangle(Point pointA, Point pointB, Color borderColor){
+		super(borderColor, pointA, pointB);
+	}
+	public Rectangle(Point pointA, Point pointB, Color borderColor, Color fillColor){
+		super(fillColor, borderColor, pointA, pointB);
 	}
 
 
@@ -20,7 +25,7 @@ public class Rectangle extends Polygon {
 	}
 
 	public Point getPointB(){
-		return pointB;
+		return this.points.get(1);
 	}
 	@Override
 	public void move(int offsetX, int offsetY){
@@ -32,6 +37,6 @@ public class Rectangle extends Polygon {
 	}
 
 	public void setPointB(Point pointB) {
-		this.pointB = pointB;
+		this.points.set(1, pointB);
 	}
 }

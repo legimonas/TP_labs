@@ -6,10 +6,18 @@ public class RegularPolygon extends Polygon {
 
     private int amountOfSides;
 
-    public RegularPolygon() {
-
+    public RegularPolygon(Point location, int amountOfSides) {
+        super(location);
+        this.amountOfSides = amountOfSides;
     }
-
+    public RegularPolygon(Point location, int amountOfSides, Color borderColor) {
+        super(borderColor, location);
+        this.amountOfSides = amountOfSides;
+    }
+    public RegularPolygon(Point location, int amountOfSides, Color borderColor, Color fillColor) {
+        super(fillColor, borderColor, location);
+        this.amountOfSides = amountOfSides;
+    }
     @Override
     public void draw(Graphics g) {
 
