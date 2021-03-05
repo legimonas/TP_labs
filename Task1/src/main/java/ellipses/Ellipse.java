@@ -18,22 +18,30 @@ public class Ellipse extends Figure2D {
 	public Ellipse(Point pointA, Point pointB) {
 		this.pointA = pointA;
 		this.pointB = pointB;
+		this.location = new Point(0, 0);
+		location.x = (pointA.x + pointB.x) / 2;
+		location.y = (pointA.y + pointB.y) / 2;
 	}
 
-	public Ellipse(Color fillColor, Point pointA, Point pointB) {
+	public Ellipse(Point pointA, Point pointB, Color fillColor) {
 		super(fillColor);
 		this.pointA = pointA;
 		this.pointB = pointB;
+		this.location = new Point(0, 0);
+		location.x = (pointA.x + pointB.x) / 2;
+		location.y = (pointA.y + pointB.y) / 2;
 	}
 
-	public Ellipse(Point location, Color lineColor, Color fillColor, Point pointA, Point pointB) {
-		super(location, lineColor, fillColor);
+	public Ellipse(Point pointA, Point pointB, Color borderColor, Color fillColor){
+		super(new Point((pointA.x + pointB.x) / 2, (pointA.y + pointB.y) / 2),borderColor, fillColor);
 		this.pointA = pointA;
 		this.pointB = pointB;
+
 	}
 
-	public void draw(Graphics g){
 
+	public void draw(Graphics g){
+		g.drawOval(pointA.x, pointB.y, pointB.x - pointA.x, pointB.y - pointA.y);
 	}
 
 	@Override

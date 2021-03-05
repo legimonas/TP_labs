@@ -1,6 +1,7 @@
 package oneD;
 
 import figures.Figure;
+import figures.FiguresConstants;
 
 import java.awt.*;
 
@@ -15,18 +16,25 @@ public class Section extends Figure {
 	}
 
 	public Section(Point secondPoint) {
+		super(new Point(0, 0), FiguresConstants.STANDARD_COLOR);
 		this.secondPoint = secondPoint;
 	}
 
-	public Section(Point location, Color lineColor, Point secondPoint) {
-		super(location, lineColor);
+	public Section(Point firstPoint, Point secondPoint) {
+		super(firstPoint, FiguresConstants.STANDARD_COLOR);
 		this.secondPoint = secondPoint;
 	}
+
+	public Section(Point firstPoint, Point secondPoint, Color lineColor) {
+		super(firstPoint, lineColor);
+		this.secondPoint = secondPoint;
+	}
+
 
 	//You can easy draw section
 	@Override
 	public void draw(Graphics g){
-
+		g.drawLine(location.x, location.y, secondPoint.x, secondPoint.y);
 	}
 
 	public Point getSecondPoint(){
