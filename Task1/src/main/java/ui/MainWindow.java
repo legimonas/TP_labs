@@ -14,6 +14,7 @@ public class MainWindow extends JFrame{
         setLayout(new BorderLayout());
         drawPanel = new DrawPanel();
         add(drawPanel, BorderLayout.CENTER);
+        createFigureButton = new JButton("add figure");
 
         createFigureButton.addActionListener(e -> {
             CreateFigureDialog d = new CreateFigureDialog();
