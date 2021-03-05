@@ -8,21 +8,27 @@ import java.awt.event.ActionListener;
 public class MainWindow extends JFrame{
     private JPanel drawPanel;
     private JButton createFigureButton;
+    private JMenuBar menuBar;
+
 
     public MainWindow() {
         super("lab1");
         setLayout(new BorderLayout());
+        menuBar = new JMenuBar();
+        setJMenuBar(menuBar);
         drawPanel = new DrawPanel();
         add(drawPanel, BorderLayout.CENTER);
         createFigureButton = new JButton("add figure");
 
-        createFigureButton.addActionListener(e -> {
-            CreateFigureDialog d = new CreateFigureDialog();
-
+        JMenu figuresMenu = new JMenu("Figures");
+        JMenuItem addItem = new JMenuItem("Add");
+        figuresMenu.add(addItem);
+        addItem.addActionListener(e->{
+            new CreateFigureDialog();
         });
 
-        add(createFigureButton, BorderLayout.NORTH);
 
+        menuBar.add(figuresMenu);
 
         setBounds(100, 100, 700, 400);
         setVisible(true);
