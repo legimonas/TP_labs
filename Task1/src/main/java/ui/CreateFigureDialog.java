@@ -158,12 +158,7 @@ public class CreateFigureDialog extends JDialog {
                     //TODO
                     break;
                 case "Polygon":
-                    editPanel.removeAll();
-                    editPanel.setLayout(new GridLayout(1, 2));
-                    editPanel.add(new JLabel("Enter points, separated by space or \",\": "));
-                    editPanel.add(pointsTextField);
-                    pack();
-                    editPanel.revalidate();
+                    //TODO
                     break;
                 case "Rectangle":
                     //TODO
