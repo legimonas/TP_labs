@@ -37,15 +37,15 @@ public class Section extends Figure {
 		g.drawLine(location.x, location.y, secondPoint.x, secondPoint.y);
 	}
 
-	public Point getSecondPoint(){
-		return secondPoint;
-	}
 	@Override
 	public void move(int offsetX, int offsetY){
 		super.move(offsetX,offsetY);
 		secondPoint.move(offsetX,offsetY);
 	}
 
+	public Point getSecondPoint(){
+		return secondPoint;
+	}
 	public void setSecondPoint(Point secondPoint) {
 		this.secondPoint = secondPoint;
 	}

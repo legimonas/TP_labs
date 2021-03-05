@@ -10,8 +10,17 @@ public class Ray extends Section {
     public static final int EPS = 5;
 
     // Location is origin of ray
-    public Ray() {
-        super();
+
+    public Ray(Point secondPoint) {
+        super(secondPoint);
+    }
+
+    public Ray(Point firstPoint, Point secondPoint) {
+        super(firstPoint, secondPoint);
+    }
+
+    public Ray(Point firstPoint, Point secondPoint, Color lineColor) {
+        super(firstPoint, secondPoint, lineColor);
     }
 
     protected int A(Point p1, Point p2) {
@@ -62,6 +71,7 @@ public class Ray extends Section {
         return rectangle;
     }
 
+    @Override
     public void draw(Graphics g) {
 
     }
