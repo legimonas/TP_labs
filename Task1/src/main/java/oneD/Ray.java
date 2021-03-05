@@ -14,6 +14,9 @@ public class Ray extends Section {
     private static final int C = 2;
 
     // Location is origin of ray
+    public Ray() {
+
+    }
 
     public Ray(Point secondPoint) {
         super(secondPoint);
@@ -52,6 +55,7 @@ public class Ray extends Section {
                 .filter(point -> pointInRect(rectangle, point))
                 .distinct();
     }
+
 
     List<Integer> createLine(Point p1, Point p2) {
         List<Integer> line = new ArrayList<>();
@@ -137,7 +141,10 @@ public class Ray extends Section {
 
     @Override
     public void draw(Graphics g) {
-
+        Graphics2D g2d = (Graphics2D)g;
+        g2d.setColor(lineColor);
+        Point secondPoint = getSecondPointForDrawing(g2d.getClipBounds().height, g2d.getClipBounds().width);
+        g2d.drawLine(location.x, location.y, secondPoint.x, secondPoint.y);
     }
 
 }
