@@ -6,7 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class MainWindow extends JFrame{
-    private JPanel drawPanel;
+    private DrawPanel drawPanel;
     private JButton createFigureButton;
     private JMenuBar menuBar;
 
@@ -24,7 +24,8 @@ public class MainWindow extends JFrame{
         JMenuItem addItem = new JMenuItem("Add");
         figuresMenu.add(addItem);
         addItem.addActionListener(e->{
-            new CreateFigureDialog();
+            CreateFigureDialog d = new CreateFigureDialog();
+            drawPanel.addFigure(d.getFigure());
         });
 
 
