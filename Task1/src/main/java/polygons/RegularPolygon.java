@@ -54,7 +54,6 @@ public class RegularPolygon extends Polygon {
         this.amountOfSides = amount;
     }
 
-
     public int getAmountOfSides() {
         return amountOfSides;
     }

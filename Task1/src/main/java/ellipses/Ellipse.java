@@ -65,4 +65,11 @@ public class Ellipse extends Figure2D {
         return pointB;
     }
 
+    public void setPointA(Point pointA) {
+        this.pointA = pointA;
+    }
+
+    public void setPointB(Point pointB) {
+        this.pointB = pointB;
+    }
 }

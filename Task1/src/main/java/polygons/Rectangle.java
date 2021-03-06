@@ -46,19 +46,5 @@ public class Rectangle extends Polygon {
         return points.get(0);
     }
 
-    @Override
-    public Color getFillColor() {
-        return super.getFillColor();
-    }
-
-
-    @Override
-    public void move(int offsetX, int offsetY) {
-        super.move(offsetX, offsetY);
-    }
-
-    public void setFillColor(Color color) {
-        super.setFillColor(color);
-    }
 
 }

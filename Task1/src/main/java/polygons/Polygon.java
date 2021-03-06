@@ -76,10 +76,6 @@ public class Polygon extends Figure2D {
         );
     }
 
-    public Color getFillColor() {
-        return super.getFillColor();
-    }
-
     public List<Point> getPoints() {
         return points;
     }
@@ -88,10 +84,6 @@ public class Polygon extends Figure2D {
     public void move(int offsetX, int offsetY) {
         points.forEach(point -> point.move(offsetX, offsetY));
         location.move(offsetX, offsetY);
-    }
-
-    public void setFillColor(Color color) {
-        super.setFillColor(color);
     }
 
     public void setPoints(List<Point> points) {
