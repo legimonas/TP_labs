@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static figures.FiguresConstants.STANDARD_STROKE_WIDTH;
+
 public class Polygon extends Figure2D {
 
     protected List<Point> points;
@@ -52,11 +54,26 @@ public class Polygon extends Figure2D {
 
     @Override
     public void draw(Graphics g) {
-
+        Graphics2D g2d = (Graphics2D) g;
+        points.add(0, location);
+        drawPolygon(g2d);
+        points.remove(0);
     }
 
-    public Color getFillColor() {
-        return super.getFillColor();
+    protected void drawPolygon(Graphics2D g2d) {
+        g2d.setColor(getFillColor());
+        g2d.fillPolygon(
+                points.stream().mapToInt(point -> point.x).toArray(),
+                points.stream().mapToInt(point -> point.y).toArray(),
+                points.size()
+        );
+        g2d.setColor(getLineColor());
+        g2d.setStroke(new BasicStroke(STANDARD_STROKE_WIDTH));
+        g2d.drawPolygon(
+                points.stream().mapToInt(point -> point.x).toArray(),
+                points.stream().mapToInt(point -> point.y).toArray(),
+                points.size()
+        );
     }
 
     public List<Point> getPoints() {
@@ -66,10 +83,7 @@ public class Polygon extends Figure2D {
     @Override
     public void move(int offsetX, int offsetY) {
         points.forEach(point -> point.move(offsetX, offsetY));
-    }
-
-    public void setFillColor(Color color) {
-        super.setFillColor(color);
+        location.move(offsetX, offsetY);
     }
 
     public void setPoints(List<Point> points) {

@@ -82,7 +82,7 @@ public class Ray extends Section {
             double dy = -A1 * C2 + C1 * A2;
             result = new Point((int) Math.round(dx / d), (int) Math.round(dy / d));
         } else {
-            throw new ParallelExeption();
+            throw new ParallelException();
         }
         return result;
     }
@@ -123,7 +123,7 @@ public class Ray extends Section {
         for (int i = 0; i < 4; i++) {
             try {
                 result.add(intersectionPoint(p1, p2, rect.get(i), rect.get(i + 1)));
-            } catch (ParallelExeption ignored) {
+            } catch (ParallelException ignored) {
 
             }
         }
