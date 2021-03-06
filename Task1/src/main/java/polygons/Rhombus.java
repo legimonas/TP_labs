@@ -11,11 +11,11 @@ public class Rhombus extends Polygon {
         super(pointA, pointB, pointC);
     }
 
-    public Rhombus(Color borderColor, Point pointA, Point pointB, Point pointC) {
+    public Rhombus(Point pointA, Point pointB, Point pointC, Color borderColor) {
         super(borderColor, pointA, pointB, pointC);
     }
 
-    public Rhombus(Color borderColor, Color fillColor, Point pointA, Point pointB, Point pointC) {
+    public Rhombus(Point pointA, Point pointB, Point pointC, Color borderColor, Color fillColor) {
         super(borderColor, fillColor, pointA, pointB, pointC);
     }
 
