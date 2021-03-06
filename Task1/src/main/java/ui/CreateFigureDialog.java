@@ -159,6 +159,8 @@ public class CreateFigureDialog extends JDialog {
                     editPanel.setLayout(new GridLayout(2, 2));
                     editPanel.add(new JLabel("Point 1: "));
                     editPanel.add(point1TextField);
+                    editPanel.add(new JLabel("Center: "));
+                    editPanel.add(point2TextField);
                     editPanel.add(new JLabel("Amount of ages: "));
                     editPanel.add(amountOfAgesTextField);
                     buttonsPanel.remove(addButton);
@@ -235,8 +237,9 @@ public class CreateFigureDialog extends JDialog {
                 }
                 case "Regular Polygon": {
                     int amountOfAges = Integer.parseInt(amountOfAgesTextField.getText());
-                    Point centerPoint = getPoint(point1TextField);
-                    figure = new RegularPolygon(centerPoint, amountOfAges, borderColor, fillColor);
+                    Point point = getPoint(point1TextField);
+                    Point centerPoint = getPoint(point2TextField);
+                    figure = new RegularPolygon(centerPoint, point, amountOfAges, borderColor, fillColor);
                     break;
                 }
                 case "Rhombus": {
