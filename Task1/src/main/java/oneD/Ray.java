@@ -13,13 +13,12 @@ public class Ray extends Section {
     private static final int B = 1;
     private static final int C = 2;
 
+    private int width;
+    private int height;
+
     // Location is origin of ray
     public Ray() {
 
-    }
-
-    public Ray(Point secondPoint) {
-        super(secondPoint);
     }
 
     public Ray(Point firstPoint, Point secondPoint) {
@@ -31,7 +30,6 @@ public class Ray extends Section {
     }
 
     protected Point getSecondPointForDrawing(int height, int weight) {
-
         List<Point> rectangle = getUserRect(height, weight);
         List<Integer> normal = getNormal(createLine(getLocation(), getSecondPoint()), getLocation());
         return getInRectPointsStream(rectangle)
@@ -141,10 +139,25 @@ public class Ray extends Section {
 
     @Override
     public void draw(Graphics g) {
-        Graphics2D g2d = (Graphics2D)g;
+        Graphics2D g2d = (Graphics2D) g;
         g2d.setColor(lineColor);
-        Point secondPoint = getSecondPointForDrawing(g2d.getClipBounds().height, g2d.getClipBounds().width);
+        Point secondPoint = getSecondPointForDrawing(height, width);
         g2d.drawLine(location.x, location.y, secondPoint.x, secondPoint.y);
     }
 
+    public int getWidth() {
+        return width;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
 }
