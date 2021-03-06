@@ -156,7 +156,7 @@ public class CreateFigureDialog extends JDialog {
                     break;
                 case "Regular Polygon":
                     editPanel.removeAll();
-                    editPanel.setLayout(new GridLayout(2, 2));
+                    editPanel.setLayout(new GridLayout(3, 2));
                     editPanel.add(new JLabel("Point 1: "));
                     editPanel.add(point1TextField);
                     editPanel.add(new JLabel("Center: "));
