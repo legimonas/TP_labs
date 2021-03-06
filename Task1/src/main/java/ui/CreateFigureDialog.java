@@ -35,9 +35,11 @@ public class CreateFigureDialog extends JDialog {
     private JButton addButton;
     private JButton borderColorButton;
     private JButton fillColorButton;
+    private JFrame parentWindow;
 
-    public CreateFigureDialog() {
+    public CreateFigureDialog(JFrame parentWindow) {
         setTitle("Add figure");
+        this.parentWindow = parentWindow;
         setModal(true);
         figuresNames = new String[]{
                 "Line",
