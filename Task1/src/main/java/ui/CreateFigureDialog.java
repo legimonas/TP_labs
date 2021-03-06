@@ -1,12 +1,21 @@
 package ui;
 
+import ellipses.Circle;
+import ellipses.Ellipse;
 import figures.Figure;
 import figures.FiguresConstants;
 import oneD.Line;
+import oneD.Ray;
+import oneD.Section;
+import polygons.Polygon;
+import polygons.Rectangle;
+import polygons.RegularPolygon;
+import polygons.Rhombus;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class CreateFigureDialog extends JDialog {
@@ -20,6 +29,7 @@ public class CreateFigureDialog extends JDialog {
     private String[] figuresNames;
     private JTextField point1TextField;
     private JTextField point2TextField;
+    private JTextField point3TextField;
     private JTextField pointsTextField;
     private JTextField amountOfAgesTextField;
     private JButton addButton;
@@ -43,6 +53,7 @@ public class CreateFigureDialog extends JDialog {
         figuresComboBox = new JComboBox(figuresNames);
         point1TextField = new JTextField();
         point2TextField = new JTextField();
+        point3TextField = new JTextField();
         pointsTextField = new JTextField();
         amountOfAgesTextField = new JTextField();
 
@@ -89,34 +100,53 @@ public class CreateFigureDialog extends JDialog {
         return figure;
     }
 
+    private void createChangeEditPanelListener1D() {
+        editPanel.removeAll();
+        editPanel.setLayout(new GridLayout(2, 2));
+        editPanel.add(new JLabel("Point 1: "));
+        editPanel.add(point1TextField);
+        editPanel.add(new JLabel("Point 2: "));
+        editPanel.add(point2TextField);
+        buttonsPanel.remove(fillColorButton);
+        pack();
+        editPanel.revalidate();
+        buttonsPanel.revalidate();
+    }
+
+    private void createChangeEditPanelListener2D() {
+        editPanel.removeAll();
+        editPanel.setLayout(new GridLayout(2, 2));
+        editPanel.add(new JLabel("Point 1: "));
+        editPanel.add(point1TextField);
+        editPanel.add(new JLabel("Point 2: "));
+        editPanel.add(point2TextField);
+        buttonsPanel.remove(addButton);
+        buttonsPanel.add(fillColorButton);
+        buttonsPanel.add(addButton);
+        pack();
+        editPanel.revalidate();
+        buttonsPanel.revalidate();
+    }
+
     private void createChangeEditPanelListener(){
         figuresComboBox.addActionListener(e->{
             //TODO: modify edit panel for each figure
             String selectedItem = (String) figuresComboBox.getSelectedItem();
             switch (Objects.requireNonNull(selectedItem)){
                 case "Line":
-                    editPanel.removeAll();
-                    editPanel.setLayout(new GridLayout(2, 2));
-                    editPanel.add(new JLabel("Point 1: "));
-                    editPanel.add(point1TextField);
-                    editPanel.add(new JLabel("Point 2: "));
-                    editPanel.add(point2TextField);
-                    buttonsPanel.remove(fillColorButton);
-                    pack();
-                    editPanel.revalidate();
-                    buttonsPanel.revalidate();
+                    createChangeEditPanelListener1D();
                     break;
                 case "Ray":
-                    //TODO
+                    createChangeEditPanelListener1D();
                     break;
                 case "Section":
-                    //TODO
+                    createChangeEditPanelListener1D();
                     break;
                 case "Circle":
-                    //TODO
+                    createChangeEditPanelListener2D();
                     break;
                 case "Ellipse":
-                    //TODO
+                    createChangeEditPanelListener2D();
                     break;
                 case "Polygon":
                     editPanel.removeAll();
@@ -131,13 +161,37 @@ public class CreateFigureDialog extends JDialog {
                     buttonsPanel.revalidate();
                     break;
                 case "Rectangle":
-                    //TODO
+                    createChangeEditPanelListener2D();
                     break;
                 case "Regular Polygon":
-                    //TODO
+                    editPanel.removeAll();
+                    editPanel.setLayout(new GridLayout(2, 2));
+                    editPanel.add(new JLabel("Point 1: "));
+                    editPanel.add(point1TextField);
+                    editPanel.add(new JLabel("Amount of ages: "));
+                    editPanel.add(amountOfAgesTextField);
+                    buttonsPanel.remove(addButton);
+                    buttonsPanel.add(fillColorButton);
+                    buttonsPanel.add(addButton);
+                    pack();
+                    editPanel.revalidate();
+                    buttonsPanel.revalidate();
                     break;
                 case "Rhombus":
-                    //TODO
+                    editPanel.removeAll();
+                    editPanel.setLayout(new GridLayout(3, 2));
+                    editPanel.add(new JLabel("Center: "));
+                    editPanel.add(point1TextField);
+                    editPanel.add(new JLabel("Point 1: "));
+                    editPanel.add(point2TextField);
+                    editPanel.add(new JLabel("Point 2: "));
+                    editPanel.add(point3TextField);
+                    buttonsPanel.remove(addButton);
+                    buttonsPanel.add(fillColorButton);
+                    buttonsPanel.add(addButton);
+                    pack();
+                    editPanel.revalidate();
+                    buttonsPanel.revalidate();
                     break;
 
             }
@@ -148,7 +202,7 @@ public class CreateFigureDialog extends JDialog {
         addButton.addActionListener(e->{
             String selectedItem = (String) figuresComboBox.getSelectedItem();
             switch (Objects.requireNonNull(selectedItem)) {
-                case "Line":
+                case "Line": {
                     String pointAString = point1TextField.getText();
                     String pointBString = point2TextField.getText();
                     String[] coordsA = pointAString.split("[ ,]");
@@ -157,30 +211,88 @@ public class CreateFigureDialog extends JDialog {
                     Point pointB = new Point(Integer.parseInt(coordsB[0]), Integer.parseInt(coordsB[1]));
                     figure = new Line(pointA, pointB, borderColor);
                     break;
-                case "Ray":
-                    //TODO
+                }
+                case "Ray":{
+                    String pointAString = point1TextField.getText();
+                    String pointBString = point2TextField.getText();
+                    String[] coordsA = pointAString.split("[ ,]");
+                    Point pointA = new Point(Integer.parseInt(coordsA[0]), Integer.parseInt(coordsA[1]));
+                    String[] coordsB = pointBString.split("[ ,]");
+                    Point pointB = new Point(Integer.parseInt(coordsB[0]), Integer.parseInt(coordsB[1]));
+                    figure = new Ray(pointA, pointB, borderColor);
                     break;
-                case "Section":
-                    //TODO
+                }
+                case "Section":{
+                    String pointAString = point1TextField.getText();
+                    String pointBString = point2TextField.getText();
+                    String[] coordsA = pointAString.split("[ ,]");
+                    Point pointA = new Point(Integer.parseInt(coordsA[0]), Integer.parseInt(coordsA[1]));
+                    String[] coordsB = pointBString.split("[ ,]");
+                    Point pointB = new Point(Integer.parseInt(coordsB[0]), Integer.parseInt(coordsB[1]));
+                    figure = new Section(pointA, pointB, borderColor);
                     break;
-                case "Circle":
-                    //TODO
+                }
+                case "Circle":{
+                    String pointAString = point1TextField.getText();
+                    String pointBString = point2TextField.getText();
+                    String[] coordsA = pointAString.split("[ ,]");
+                    Point pointA = new Point(Integer.parseInt(coordsA[0]), Integer.parseInt(coordsA[1]));
+                    String[] coordsB = pointBString.split("[ ,]");
+                    Point pointB = new Point(Integer.parseInt(coordsB[0]), Integer.parseInt(coordsB[1]));
+                    figure = new Circle(pointA, pointB, borderColor, fillColor);
                     break;
-                case "Ellipse":
-                    //TODO
+                }
+                case "Ellipse":{
+                    String pointAString = point1TextField.getText();
+                    String pointBString = point2TextField.getText();
+                    String[] coordsA = pointAString.split("[ ,]");
+                    Point pointA = new Point(Integer.parseInt(coordsA[0]), Integer.parseInt(coordsA[1]));
+                    String[] coordsB = pointBString.split("[ ,]");
+                    Point pointB = new Point(Integer.parseInt(coordsB[0]), Integer.parseInt(coordsB[1]));
+                    figure = new Ellipse(pointA, pointB, borderColor, fillColor);
                     break;
-                case "Polygon":
-                    //TODO
+                }
+                case "Polygon":{
+                    String pointsString = pointsTextField.getText();
+                    String[] coords = pointsString.split("[ ,]");
+                    ArrayList<Point> points = new ArrayList<>();
+                    for (int i = 0; i < coords.length; i += 2) {
+                        points.add(new Point(Integer.parseInt(coords[i]), Integer.parseInt(coords[i + 1])));
+                    }
+                    figure = new Polygon(points, borderColor, fillColor);
                     break;
-                case "Rectangle":
-                    //TODO
+                }
+                case "Rectangle": {
+                    String pointAString = point1TextField.getText();
+                    String pointBString = point2TextField.getText();
+                    String[] coordsA = pointAString.split("[ ,]");
+                    Point pointA = new Point(Integer.parseInt(coordsA[0]), Integer.parseInt(coordsA[1]));
+                    String[] coordsB = pointBString.split("[ ,]");
+                    Point pointB = new Point(Integer.parseInt(coordsB[0]), Integer.parseInt(coordsB[1]));
+                    figure = new Rectangle(pointA, pointB, borderColor, fillColor);
                     break;
-                case "Regular Polygon":
-                    //TODO
+                }
+                case "Regular Polygon":{
+                    int amountOfAges = Integer.parseInt(amountOfAgesTextField.getText());
+                    String pointAString = point1TextField.getText();
+                    String[] coordsA = pointAString.split("[ ,]");
+                    Point pointA = new Point(Integer.parseInt(coordsA[0]), Integer.parseInt(coordsA[1]));
+                    figure = new RegularPolygon(pointA, amountOfAges,borderColor, fillColor);
                     break;
-                case "Rhombus":
-                    //TODO
+                }
+                case "Rhombus":{
+                    String center = point1TextField.getText();
+                    String pointAString = point2TextField.getText();
+                    String pointBString = point3TextField.getText();
+                    String[] coordsCenter = pointAString.split("[ ,]");
+                    Point centerPoint = new Point(Integer.parseInt(coordsCenter[0]), Integer.parseInt(coordsCenter[1]));
+                    String[] coordsA = pointAString.split("[ ,]");
+                    Point pointA = new Point(Integer.parseInt(coordsA[0]), Integer.parseInt(coordsA[1]));
+                    String[] coordsB = pointBString.split("[ ,]");
+                    Point pointB = new Point(Integer.parseInt(coordsB[0]), Integer.parseInt(coordsB[1]));
+                    figure = new Rhombus(centerPoint, pointA, pointB, borderColor, fillColor);
                     break;
+                }
             }
             dispose();
         });

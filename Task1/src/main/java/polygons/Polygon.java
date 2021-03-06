@@ -28,12 +28,12 @@ public class Polygon extends Figure2D {
         this.points = Arrays.asList(points).subList(1, points.length);
     }
 
-    public Polygon(Color fillColor, Color borderColor, List<Point> points) {
+    public Polygon(List<Point> points, Color borderColor, Color fillColor) {
         super(points.get(0), borderColor, fillColor);
         this.points = points.subList(1, points.size());
     }
 
-    public Polygon(Color borderColor, List<Point> points) {
+    public Polygon(List<Point> points, Color borderColor) {
         super(points.get(0), borderColor, FiguresConstants.STANDARD_COLOR);
         this.points = points.subList(1, points.size());
     }
