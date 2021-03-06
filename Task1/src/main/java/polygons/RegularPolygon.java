@@ -19,7 +19,7 @@ public class RegularPolygon extends Polygon {
     }
 
     public RegularPolygon(Point location, Point point, int amountOfSides, Color borderColor, Color fillColor) {
-        super(fillColor, borderColor, location);
+        super(fillColor, borderColor, location, point);
         this.amountOfSides = amountOfSides;
     }
 
