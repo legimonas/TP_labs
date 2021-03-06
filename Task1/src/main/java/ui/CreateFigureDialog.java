@@ -211,9 +211,11 @@ public class CreateFigureDialog extends JDialog {
             switch (Objects.requireNonNull(selectedItem)) {
                 case "Line":
                     figure = new Line(pointA, pointB, borderColor);
+                    setRayBounds(figure);
                     break;
                 case "Ray":
                     figure = new Ray(pointA, pointB, borderColor);
+                    setRayBounds(figure);
                     break;
                 case "Section":
                     figure = new Section(pointA, pointB, borderColor);
@@ -252,6 +254,12 @@ public class CreateFigureDialog extends JDialog {
             }
             dispose();
         });
+    }
+    private void setRayBounds(Figure figure){
+        int width = ((MainWindow)parentWindow).getDrawPanel().getWidth();
+        int height = ((MainWindow)parentWindow).getDrawPanel().getHeight();
+        ((Ray)figure).setWidth(width);
+        ((Ray)figure).setHeight(height);
     }
 
     private void addColorChoosers() {
