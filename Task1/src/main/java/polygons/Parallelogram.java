@@ -16,7 +16,7 @@ public class Parallelogram extends Polygon {
     }
 
     public Parallelogram(Point pointA, Point pointB, Point pointC, Color borderColor, Color fillColor) {
-        super(borderColor, fillColor, pointA, pointB, pointC);
+        super(fillColor, borderColor, pointA, pointB, pointC);
     }
 
     @Override

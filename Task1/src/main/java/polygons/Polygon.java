@@ -18,18 +18,23 @@ public class Polygon extends Figure2D {
         points = new ArrayList<>();
     }
 
-    public Polygon(List<Point> points) {
-        super(points.get(0), FiguresConstants.STANDARD_COLOR, FiguresConstants.STANDARD_COLOR);
-        this.points = points.subList(1, points.size());
-    }
-
     public Polygon(Point... points) {
         super(points[0], FiguresConstants.STANDARD_COLOR, FiguresConstants.STANDARD_COLOR);
         this.points = new ArrayList<>(Arrays.asList(points).subList(1, points.length));
     }
 
-    public Polygon(List<Point> points, Color borderColor, Color fillColor) {
-        super(points.get(0), borderColor, fillColor);
+    public Polygon(Color borderColor, Point... points) {
+        super(points[0], borderColor, FiguresConstants.STANDARD_COLOR);
+        this.points = new ArrayList<>(Arrays.asList(points).subList(1, points.length));
+    }
+
+    public Polygon(Color fillColor, Color borderColor, Point... points) {
+        super(points[0], borderColor, fillColor);
+        this.points = new ArrayList<>(Arrays.asList(points).subList(1, points.length));
+    }
+
+    public Polygon(List<Point> points) {
+        super(points.get(0), FiguresConstants.STANDARD_COLOR, FiguresConstants.STANDARD_COLOR);
         this.points = points.subList(1, points.size());
     }
 
@@ -38,14 +43,9 @@ public class Polygon extends Figure2D {
         this.points = points.subList(1, points.size());
     }
 
-    public Polygon(Color fillColor, Color borderColor, Point... points) {
-        super(points[0], borderColor, fillColor);
-        this.points = new ArrayList<>(Arrays.asList(points).subList(1, points.length));
-    }
-
-    public Polygon(Color borderColor, Point... points) {
-        super(points[0], borderColor, FiguresConstants.STANDARD_COLOR);
-        this.points = new ArrayList<>(Arrays.asList(points).subList(1, points.length));
+    public Polygon(List<Point> points, Color borderColor, Color fillColor) {
+        super(points.get(0), borderColor, fillColor);
+        this.points = points.subList(1, points.size());
     }
 
     public void addPoint(Point point) {

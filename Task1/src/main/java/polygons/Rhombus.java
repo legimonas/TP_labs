@@ -3,18 +3,23 @@ package polygons;
 import java.awt.*;
 
 public class Rhombus extends Parallelogram{
-    public Rhombus(Point pointA, Point pointB, double relativeCenter) {
-        super(getCenterByRelativeAlign(pointA, pointB, relativeCenter), pointA, pointB);
+    public Rhombus(Point pointA, Point pointB) {
+        super(getCenterByPoints(pointA, pointB), pointA, pointB);
     }
 
-    public Rhombus(Point pointA, Point pointB, double relativeCenter, Color borderColor) {
-        super(getCenterByRelativeAlign(pointA, pointB, relativeCenter), pointA, pointB, borderColor);
+    public Rhombus(Point pointA, Point pointB, Color borderColor) {
+        super(getCenterByPoints(pointA, pointB), pointA, pointB, borderColor);
     }
 
-    public Rhombus(Point pointA, Point pointB, double relativeCenter, Color borderColor, Color fillColor) {
-        super(getCenterByRelativeAlign(pointA, pointB, relativeCenter), pointA, pointB, borderColor, fillColor);
+    public Rhombus(Point pointA, Point pointB, Color borderColor, Color fillColor) {
+        super(getCenterByPoints(pointA, pointB), pointA, pointB, borderColor, fillColor);
     }
-    private static Point getCenterByRelativeAlign(Point pointA, Point pointB, double relative){
+
+    private static Point getCenterByPoints(Point pointA, Point pointB){
+        return new Point(pointA.x, pointB.y);
+    }
+
+    /*private static Point getCenterByRelativeAlign(Point pointA, Point pointB, double relative){
         if(relative >= 1 || relative <= 0){
             throw new IllegalArgumentException("relative allign should be in range (0, .. 1)");
         }
@@ -41,5 +46,5 @@ public class Rhombus extends Parallelogram{
         double height = Math.sqrt(c1 * c2);
 
         return new Point((int) (height * normalizedA + x0), (int) (height * normalizedB + y0));
-    }
+    }*/
 }

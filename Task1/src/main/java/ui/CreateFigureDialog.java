@@ -49,7 +49,8 @@ public class CreateFigureDialog extends JDialog {
                 "Polygon",
                 "Rectangle",
                 "Regular Polygon",
-                "Rhombus"
+                "Rhombus",
+                "Parallelogram"
         };
         figuresComboBox = new JComboBox(figuresNames);
         point1TextField = new JTextField();
@@ -141,6 +142,7 @@ public class CreateFigureDialog extends JDialog {
                 case "Circle":
                 case "Ellipse":
                 case "Rectangle":
+                case "Rhombus":
                     createChangeEditPanelListener2D();
                     break;
                 case "Polygon":
@@ -171,14 +173,14 @@ public class CreateFigureDialog extends JDialog {
                     editPanel.revalidate();
                     buttonsPanel.revalidate();
                     break;
-                case "Rhombus":
+                case "Parallelogram":
                     editPanel.removeAll();
                     editPanel.setLayout(new GridLayout(3, 2));
                     editPanel.add(new JLabel("Point 1: "));
                     editPanel.add(point1TextField);
                     editPanel.add(new JLabel("Point 2: "));
                     editPanel.add(point2TextField);
-                    editPanel.add(new JLabel("Center Relative Align in (0, 1): "));
+                    editPanel.add(new JLabel("Center: "));
                     editPanel.add(point3TextField);
                     buttonsPanel.remove(addButton);
                     buttonsPanel.add(fillColorButton);
@@ -245,10 +247,12 @@ public class CreateFigureDialog extends JDialog {
                     figure = new RegularPolygon(centerPoint, point, amountOfAges, borderColor, fillColor);
                     break;
                 }
-                case "Rhombus": {
-                    double relativeCenter = Double.parseDouble(point3TextField.getText());
-                    figure = new Rhombus(pointA, pointB, relativeCenter, borderColor, fillColor);
+                case "Rhombus":
+                    figure = new Rhombus(pointA, pointB, borderColor, fillColor);
                     break;
+                case "Parallelogram": {
+                    Point center = getPoint(point3TextField);
+                    figure = new Parallelogram(center, pointA, pointB, borderColor, fillColor);
                 }
             }
             dispose();
