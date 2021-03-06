@@ -25,12 +25,14 @@ public class MainWindow extends JFrame{
         figuresMenu.add(addItem);
         addItem.addActionListener(e->{
             CreateFigureDialog d = new CreateFigureDialog();
-            drawPanel.addFigure(d.getFigure());
+            if(d.getFigure() != null)
+                drawPanel.addFigure(d.getFigure());
         });
 
 
         menuBar.add(figuresMenu);
 
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 700, 400);
         setVisible(true);
 
