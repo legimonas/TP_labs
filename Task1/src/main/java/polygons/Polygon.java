@@ -56,6 +56,11 @@ public class Polygon extends Figure2D {
     public void draw(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
         points.add(0, location);
+        drawPolygon(g2d);
+        points.remove(0);
+    }
+
+    protected void drawPolygon(Graphics2D g2d) {
         g2d.setColor(getFillColor());
         g2d.fillPolygon(
                 points.stream().mapToInt(point -> point.x).toArray(),
@@ -69,7 +74,6 @@ public class Polygon extends Figure2D {
                 points.stream().mapToInt(point -> point.y).toArray(),
                 points.size()
         );
-        points.remove(0);
     }
 
     public Color getFillColor() {
