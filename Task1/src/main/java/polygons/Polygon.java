@@ -25,7 +25,7 @@ public class Polygon extends Figure2D {
 
     public Polygon(Point... points) {
         super(points[0], FiguresConstants.STANDARD_COLOR, FiguresConstants.STANDARD_COLOR);
-        this.points = Arrays.asList(points).subList(1, points.length);
+        this.points = new ArrayList<>(Arrays.asList(points).subList(1, points.length));
     }
 
     public Polygon(List<Point> points, Color borderColor, Color fillColor) {
@@ -40,12 +40,12 @@ public class Polygon extends Figure2D {
 
     public Polygon(Color fillColor, Color borderColor, Point... points) {
         super(points[0], borderColor, fillColor);
-        this.points = Arrays.asList(points).subList(1, points.length);
+        this.points = new ArrayList<>(Arrays.asList(points).subList(1, points.length));
     }
 
     public Polygon(Color borderColor, Point... points) {
         super(points[0], borderColor, FiguresConstants.STANDARD_COLOR);
-        this.points = Arrays.asList(points).subList(1, points.length);
+        this.points = new ArrayList<>(Arrays.asList(points).subList(1, points.length));
     }
 
     public void addPoint(Point point) {
