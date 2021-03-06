@@ -24,7 +24,7 @@ public class MainWindow extends JFrame{
         JMenuItem addItem = new JMenuItem("Add");
         figuresMenu.add(addItem);
         addItem.addActionListener(e->{
-            CreateFigureDialog d = new CreateFigureDialog();
+            CreateFigureDialog d = new CreateFigureDialog(this);
             if(d.getFigure() != null)
                 drawPanel.addFigure(d.getFigure());
         });
@@ -40,5 +40,9 @@ public class MainWindow extends JFrame{
 
     public static void main(String[] args) {
         new MainWindow();
+    }
+
+    public DrawPanel getDrawPanel() {
+        return drawPanel;
     }
 }
