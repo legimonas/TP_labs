@@ -4,6 +4,8 @@ import figures.Figure2D;
 
 import java.awt.*;
 
+import static figures.FiguresConstants.STANDARD_STROKE_WIDTH;
+
 public class Ellipse extends Figure2D {
 
     private Point pointA;
@@ -40,7 +42,12 @@ public class Ellipse extends Figure2D {
 
     @Override
     public void draw(Graphics g) {
-        g.drawOval(pointA.x, pointB.y, pointB.x - pointA.x, pointB.y - pointA.y);
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.setColor(getFillColor());
+        g2d.fillOval(getPointA().x, getPointA().y, Math.abs(getPointA().x - getPointB().x), Math.abs(getPointA().y - getPointB().y));
+        g2d.setColor(getLineColor());
+        g2d.setStroke(new BasicStroke(STANDARD_STROKE_WIDTH));
+        g2d.drawOval(getPointA().x, getPointA().y, Math.abs(getPointA().x - getPointB().x), Math.abs(getPointA().y - getPointB().y));
     }
 
     @Override

@@ -27,10 +27,6 @@ public class Circle extends Ellipse {
                 fillColor
         );
     }
-
-    @Override
-    public void draw(Graphics g) {
-
-    }
+    
 
 }
