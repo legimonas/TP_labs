@@ -7,10 +7,9 @@ import figures.FiguresConstants;
 import oneD.Line;
 import oneD.Ray;
 import oneD.Section;
+import polygons.*;
 import polygons.Polygon;
 import polygons.Rectangle;
-import polygons.RegularPolygon;
-import polygons.Rhombus;
 
 import javax.swing.*;
 import java.awt.*;
@@ -179,7 +178,7 @@ public class CreateFigureDialog extends JDialog {
                     editPanel.add(point1TextField);
                     editPanel.add(new JLabel("Point 2: "));
                     editPanel.add(point2TextField);
-                    editPanel.add(new JLabel("Center: "));
+                    editPanel.add(new JLabel("Center Relative Align in (0, 1): "));
                     editPanel.add(point3TextField);
                     buttonsPanel.remove(addButton);
                     buttonsPanel.add(fillColorButton);
@@ -247,8 +246,8 @@ public class CreateFigureDialog extends JDialog {
                     break;
                 }
                 case "Rhombus": {
-                    Point centerPoint = getPoint(point3TextField);
-                    figure = new Rhombus(centerPoint, pointA, pointB, borderColor, fillColor);
+                    double relativeCenter = Double.parseDouble(point3TextField.getText());
+                    figure = new Rhombus(pointA, pointB, relativeCenter, borderColor, fillColor);
                     break;
                 }
             }

@@ -56,24 +56,24 @@ public class Polygon extends Figure2D {
     public void draw(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
         points.add(0, location);
-        drawPolygon(g2d);
+        drawPolygon(
+                g2d,
+                points.stream().mapToInt(point -> point.x).toArray(),
+                points.stream().mapToInt(point -> point.y).toArray()
+        );
         points.remove(0);
     }
 
-    protected void drawPolygon(Graphics2D g2d) {
+    protected void drawPolygon(Graphics2D g2d, int[] xPoints, int[] yPoints) {
+        if(xPoints.length != yPoints.length){
+            throw new IllegalArgumentException("dimension of xAxis does not match yAxis");
+        }
+
         g2d.setColor(getFillColor());
-        g2d.fillPolygon(
-                points.stream().mapToInt(point -> point.x).toArray(),
-                points.stream().mapToInt(point -> point.y).toArray(),
-                points.size()
-        );
+        g2d.fillPolygon(xPoints, yPoints, xPoints.length);
         g2d.setColor(getLineColor());
         g2d.setStroke(new BasicStroke(STANDARD_STROKE_WIDTH));
-        g2d.drawPolygon(
-                points.stream().mapToInt(point -> point.x).toArray(),
-                points.stream().mapToInt(point -> point.y).toArray(),
-                points.size()
-        );
+        g2d.drawPolygon(xPoints, yPoints, yPoints.length);
     }
 
     public List<Point> getPoints() {

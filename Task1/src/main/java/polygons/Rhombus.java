@@ -2,52 +2,44 @@ package polygons;
 
 import java.awt.*;
 
-public class Rhombus extends Polygon {
-
-    //PointA is center
-    //PointB and PointC have different diagonals
-
-    public Rhombus(Point pointA, Point pointB, Point pointC) {
-        super(pointA, pointB, pointC);
+public class Rhombus extends Parallelogram{
+    public Rhombus(Point pointA, Point pointB, double relativeCenter) {
+        super(getCenterByRelativeAlign(pointA, pointB, relativeCenter), pointA, pointB);
     }
 
-    public Rhombus(Point pointA, Point pointB, Point pointC, Color borderColor) {
-        super(borderColor, pointA, pointB, pointC);
+    public Rhombus(Point pointA, Point pointB, double relativeCenter, Color borderColor) {
+        super(getCenterByRelativeAlign(pointA, pointB, relativeCenter), pointA, pointB, borderColor);
     }
 
-    public Rhombus(Point pointA, Point pointB, Point pointC, Color borderColor, Color fillColor) {
-        super(borderColor, fillColor, pointA, pointB, pointC);
+    public Rhombus(Point pointA, Point pointB, double relativeCenter, Color borderColor, Color fillColor) {
+        super(getCenterByRelativeAlign(pointA, pointB, relativeCenter), pointA, pointB, borderColor, fillColor);
     }
+    private static Point getCenterByRelativeAlign(Point pointA, Point pointB, double relative){
+        if(relative >= 1 || relative <= 0){
+            throw new IllegalArgumentException("relative allign should be in range (0, .. 1)");
+        }
+        double x0 = pointA.x + relative * (pointB.x - pointA.x);
+        double y0 = pointA.y + (1 - relative) * (pointA.y - pointB.y);
 
-    @Override
-    public void draw(Graphics g) {
-        int dx = getDx(getPointB());
-        int dy = getDy(getPointB());
-        points.add(new Point(getPointA().x + dx, getPointA().y + dy));
-        dx = getDx(getPointC());
-        dy = getDy(getPointC());
-        points.add(new Point(getPointA().x + dx, getPointA().y + dy));
-        drawPolygon((Graphics2D) g);
-    }
+        double a = (double) (pointB.y - pointA.y) / (pointB.x - pointA.x);
+        double b = pointA.y - a * pointA.x;
 
-    private int getDx(Point point) {
-        return Math.abs(getPointA().x - point.x);
-    }
+        double norm = Math.sqrt(a * a + b * b);
+        double normalizedA = a / norm;
+        double normalizedB = b / norm;
 
-    private int getDy(Point point) {
-        return Math.abs(getPointA().y - point.y);
-    }
+        double gypLengthX = Math.abs(pointB.x - pointA.x);
+        double c1X = relative * gypLengthX;
+        double c2X = gypLengthX - c1X;
 
+        double gypLengthY = Math.abs(pointB.y - pointA.y);
+        double c1Y = relative * gypLengthY;
+        double c2Y = gypLengthY - c1Y;
 
-    private Point getPointA() {
-        return location;
-    }
+        double c1 = Math.sqrt(c1X * c1X + c1Y * c1Y);
+        double c2 = Math.sqrt(c2X * c2X + c2Y * c2Y);
+        double height = Math.sqrt(c1 * c2);
 
-    private Point getPointB() {
-        return points.get(0);
-    }
-
-    private Point getPointC() {
-        return points.get(1);
+        return new Point((int) (height * normalizedA + x0), (int) (height * normalizedB + y0));
     }
 }
