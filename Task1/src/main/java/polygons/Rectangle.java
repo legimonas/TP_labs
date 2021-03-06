@@ -2,7 +2,11 @@ package polygons;
 
 import java.awt.*;
 
+import static figures.FiguresConstants.STANDARD_STROKE_WIDTH;
+
 public class Rectangle extends Polygon {
+
+    //PointA -- left and top, PointB -- right and bottom
 
     public Rectangle(Point pointA, Point pointB) {
         super(pointA, pointB);
@@ -18,7 +22,28 @@ public class Rectangle extends Polygon {
 
     @Override
     public void draw(Graphics g) {
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.setColor(getFillColor());
+        g2d.fillRect(getPointA().x, getPointA().y, getWidth(), getHeight());
+        g2d.setColor(getLineColor());
+        g2d.setStroke(new BasicStroke(STANDARD_STROKE_WIDTH));
+        g2d.drawRect(getPointA().x, getPointA().y, getWidth(), getHeight());
+    }
 
+    private int getHeight() {
+        return Math.abs(getPointA().y - getPointB().y);
+    }
+
+    private int getWidth() {
+        return Math.abs(getPointA().x - getPointB().x);
+    }
+
+    private Point getPointA() {
+        return getLocation();
+    }
+
+    private Point getPointB() {
+        return points.get(0);
     }
 
     @Override
@@ -26,9 +51,6 @@ public class Rectangle extends Polygon {
         return super.getFillColor();
     }
 
-    public Point getPointB() {
-        return this.points.get(1);
-    }
 
     @Override
     public void move(int offsetX, int offsetY) {
@@ -39,7 +61,4 @@ public class Rectangle extends Polygon {
         super.setFillColor(color);
     }
 
-    public void setPointB(Point pointB) {
-        this.points.set(1, pointB);
-    }
 }

@@ -4,6 +4,7 @@ import java.awt.*;
 
 public class Rhombus extends Polygon {
 
+    //PointA is center
     public Rhombus(Point pointA, Point pointB, Point pointC) {
         super(pointA, pointB, pointC);
     }
