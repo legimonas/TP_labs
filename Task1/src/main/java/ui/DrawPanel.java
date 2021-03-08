@@ -1,7 +1,6 @@
 package ui;
 
 import figures.Figure;
-import figures.FiguresConstants;
 
 import javax.swing.*;
 import java.awt.*;
@@ -28,7 +27,7 @@ public class DrawPanel extends JPanel {
         g.setColor(Color.WHITE);
         g.fillRect(0, 0, this.getWidth(), this.getHeight());
         g.setColor(Color.BLACK);
-        for(Figure figure : figures){
+        for (Figure figure : figures) {
             figure.draw(g);
         }
     }

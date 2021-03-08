@@ -54,14 +54,6 @@ public class RayTest extends Ray {
         assertEquals(4, result.size());
     }
 
-    @Test
-    public void shouldReturnTwoPoints() {
-        List<Point> rect = getUserRect(10, 11);
-
-        long result = getInRectPointsStream(rect).count();
-
-        assertEquals(2, result);
-    }
 
     @Test
     public void shouldOneSide() {

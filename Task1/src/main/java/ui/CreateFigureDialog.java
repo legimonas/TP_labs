@@ -7,9 +7,11 @@ import figures.FiguresConstants;
 import oneD.Line;
 import oneD.Ray;
 import oneD.Section;
-import polygons.*;
+import polygons.Parallelogram;
 import polygons.Polygon;
 import polygons.Rectangle;
+import polygons.RegularPolygon;
+import polygons.Rhombus;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,6 +20,16 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class CreateFigureDialog extends JDialog {
+    public static final String LINE = "Line";
+    public static final String RAY = "Ray";
+    public static final String SECTION = "Section";
+    public static final String CIRCLE = "Circle";
+    public static final String ELLIPSE = "Ellipse";
+    public static final String POLYGON = "Polygon";
+    public static final String RECTANGLE = "Rectangle";
+    public static final String REGULAR_POLYGON = "Regular Polygon";
+    public static final String RHOMBUS = "Rhombus";
+    public static final String PARALLELOGRAM = "Parallelogram";
     private JPanel editPanel;
     private JPanel buttonsPanel;
 
@@ -41,16 +53,16 @@ public class CreateFigureDialog extends JDialog {
         this.parentWindow = parentWindow;
         setModal(true);
         figuresNames = new String[]{
-                "Line",
-                "Ray",
-                "Section",
-                "Circle",
-                "Ellipse",
-                "Polygon",
-                "Rectangle",
-                "Regular Polygon",
-                "Rhombus",
-                "Parallelogram"
+                LINE,
+                RAY,
+                SECTION,
+                CIRCLE,
+                ELLIPSE,
+                POLYGON,
+                RECTANGLE,
+                REGULAR_POLYGON,
+                RHOMBUS,
+                PARALLELOGRAM
         };
         figuresComboBox = new JComboBox(figuresNames);
         point1TextField = new JTextField();
@@ -70,10 +82,7 @@ public class CreateFigureDialog extends JDialog {
         setLayout(new BorderLayout());
         add(figuresComboBox, BorderLayout.NORTH);
         editPanel.setLayout(new GridLayout(2, 2));
-        editPanel.add(new JLabel("Point 1: "));
-        editPanel.add(point1TextField);
-        editPanel.add(new JLabel("Point 2: "));
-        editPanel.add(point2TextField);
+        setTextFieldsAndLabels("Point 1: ", point1TextField, "Point 2: ", point2TextField);
         editPanel.setVisible(true);
 
 
@@ -105,10 +114,7 @@ public class CreateFigureDialog extends JDialog {
     private void createChangeEditPanelListener1D() {
         editPanel.removeAll();
         editPanel.setLayout(new GridLayout(2, 2));
-        editPanel.add(new JLabel("Point 1: "));
-        editPanel.add(point1TextField);
-        editPanel.add(new JLabel("Point 2: "));
-        editPanel.add(point2TextField);
+        setTextFieldsAndLabels("Point 1: ", point1TextField, "Point 2: ", point2TextField);
         buttonsPanel.remove(fillColorButton);
         pack();
         editPanel.revalidate();
@@ -118,10 +124,7 @@ public class CreateFigureDialog extends JDialog {
     private void createChangeEditPanelListener2D() {
         editPanel.removeAll();
         editPanel.setLayout(new GridLayout(2, 2));
-        editPanel.add(new JLabel("Point 1: "));
-        editPanel.add(point1TextField);
-        editPanel.add(new JLabel("Point 2: "));
-        editPanel.add(point2TextField);
+        setTextFieldsAndLabels("Point 1: ", point1TextField, "Point 2: ", point2TextField);
         buttonsPanel.remove(addButton);
         buttonsPanel.add(fillColorButton);
         buttonsPanel.add(addButton);
@@ -130,22 +133,29 @@ public class CreateFigureDialog extends JDialog {
         buttonsPanel.revalidate();
     }
 
+    private void setTextFieldsAndLabels(String s, JTextField point1TextField, String s2, JTextField point2TextField) {
+        editPanel.add(new JLabel(s));
+        editPanel.add(point1TextField);
+        editPanel.add(new JLabel(s2));
+        editPanel.add(point2TextField);
+    }
+
     private void createChangeEditPanelListener() {
         figuresComboBox.addActionListener(e -> {
             String selectedItem = (String) figuresComboBox.getSelectedItem();
             switch (Objects.requireNonNull(selectedItem)) {
-                case "Line":
-                case "Ray":
-                case "Section":
+                case LINE:
+                case RAY:
+                case SECTION:
                     createChangeEditPanelListener1D();
                     break;
-                case "Circle":
-                case "Ellipse":
-                case "Rectangle":
-                case "Rhombus":
+                case CIRCLE:
+                case ELLIPSE:
+                case RECTANGLE:
+                case RHOMBUS:
                     createChangeEditPanelListener2D();
                     break;
-                case "Polygon":
+                case POLYGON:
                     editPanel.removeAll();
                     editPanel.setLayout(new GridLayout(1, 2));
                     editPanel.add(new JLabel("Enter points, separated by space or \",\": "));
@@ -157,13 +167,10 @@ public class CreateFigureDialog extends JDialog {
                     editPanel.revalidate();
                     buttonsPanel.revalidate();
                     break;
-                case "Regular Polygon":
+                case REGULAR_POLYGON:
                     editPanel.removeAll();
                     editPanel.setLayout(new GridLayout(3, 2));
-                    editPanel.add(new JLabel("Point 1: "));
-                    editPanel.add(point1TextField);
-                    editPanel.add(new JLabel("Center: "));
-                    editPanel.add(point2TextField);
+                    setTextFieldsAndLabels("Point 1: ", point1TextField, "Center: ", point2TextField);
                     editPanel.add(new JLabel("Amount of ages: "));
                     editPanel.add(amountOfAgesTextField);
                     buttonsPanel.remove(addButton);
@@ -173,13 +180,10 @@ public class CreateFigureDialog extends JDialog {
                     editPanel.revalidate();
                     buttonsPanel.revalidate();
                     break;
-                case "Parallelogram":
+                case PARALLELOGRAM:
                     editPanel.removeAll();
                     editPanel.setLayout(new GridLayout(3, 2));
-                    editPanel.add(new JLabel("Point 1: "));
-                    editPanel.add(point1TextField);
-                    editPanel.add(new JLabel("Point 2: "));
-                    editPanel.add(point2TextField);
+                    setTextFieldsAndLabels("Point 1: ", point1TextField, "Point 2: ", point2TextField);
                     editPanel.add(new JLabel("Center: "));
                     editPanel.add(point3TextField);
                     buttonsPanel.remove(addButton);
@@ -210,27 +214,27 @@ public class CreateFigureDialog extends JDialog {
                 pointB = getPoint(point2TextField);
             }
             switch (Objects.requireNonNull(selectedItem)) {
-                case "Line":
+                case LINE:
                     figure = new Line(pointA, pointB, borderColor);
                     setRayBounds(figure);
                     break;
-                case "Ray":
+                case RAY:
                     figure = new Ray(pointA, pointB, borderColor);
                     setRayBounds(figure);
                     break;
-                case "Section":
+                case SECTION:
                     figure = new Section(pointA, pointB, borderColor);
                     break;
-                case "Circle":
+                case CIRCLE:
                     figure = new Circle(pointA, pointB, borderColor, fillColor);
                     break;
-                case "Ellipse":
+                case ELLIPSE:
                     figure = new Ellipse(pointA, pointB, borderColor, fillColor);
                     break;
-                case "Rectangle":
+                case RECTANGLE:
                     figure = new Rectangle(pointA, pointB, borderColor, fillColor);
                     break;
-                case "Polygon": {
+                case POLYGON: {
                     String pointsString = pointsTextField.getText();
                     String[] coords = pointsString.split("[ ,]");
                     ArrayList<Point> points = new ArrayList<>();
@@ -240,17 +244,17 @@ public class CreateFigureDialog extends JDialog {
                     figure = new Polygon(points, borderColor, fillColor);
                     break;
                 }
-                case "Regular Polygon": {
+                case REGULAR_POLYGON: {
                     int amountOfAges = Integer.parseInt(amountOfAgesTextField.getText());
                     Point point = getPoint(point1TextField);
                     Point centerPoint = getPoint(point2TextField);
                     figure = new RegularPolygon(centerPoint, point, amountOfAges, borderColor, fillColor);
                     break;
                 }
-                case "Rhombus":
+                case RHOMBUS:
                     figure = new Rhombus(pointA, pointB, borderColor, fillColor);
                     break;
-                case "Parallelogram": {
+                case PARALLELOGRAM: {
                     Point center = getPoint(point3TextField);
                     figure = new Parallelogram(center, pointA, pointB, borderColor, fillColor);
                 }
@@ -258,30 +262,31 @@ public class CreateFigureDialog extends JDialog {
             dispose();
         });
     }
-    private void setRayBounds(Figure figure){
-        int width = ((MainWindow)parentWindow).getDrawPanel().getWidth();
-        int height = ((MainWindow)parentWindow).getDrawPanel().getHeight();
-        ((Ray)figure).setWidth(width);
-        ((Ray)figure).setHeight(height);
+
+    private void setRayBounds(Figure figure) {
+        int width = ((MainWindow) parentWindow).getDrawPanel().getWidth();
+        int height = ((MainWindow) parentWindow).getDrawPanel().getHeight();
+        ((Ray) figure).setWidth(width);
+        ((Ray) figure).setHeight(height);
     }
 
     private void addColorChoosers() {
         borderColorButton.addActionListener(e -> {
-            borderColor = JColorChooser.showDialog(
-                    this,
-                    "Choose border color",
-                    FiguresConstants.STANDARD_COLOR
-            );
+            borderColor = getChoseColor("Choose border color");
             updateButtonsIcons();
         });
         fillColorButton.addActionListener(e -> {
-            fillColor = JColorChooser.showDialog(
-                    this,
-                    "Choose fill color",
-                    FiguresConstants.STANDARD_COLOR
-            );
+            fillColor = getChoseColor("Choose fill color");
             updateButtonsIcons();
         });
+    }
+
+    private Color getChoseColor(String message) {
+        return JColorChooser.showDialog(
+                this,
+                message,
+                FiguresConstants.STANDARD_COLOR
+        );
     }
 
     private void updateButtonsIcons() {

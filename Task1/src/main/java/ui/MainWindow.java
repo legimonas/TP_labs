@@ -1,17 +1,18 @@
 package ui;
 
-import com.formdev.flatlaf.FlatIntelliJLaf;
-import com.formdev.flatlaf.FlatLightLaf;
+//import com.formdev.flatlaf.FlatIntelliJLaf;
+//import com.formdev.flatlaf.FlatLightLaf;
+
 import figures.Figure;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.List;
 
 public class MainWindow extends JFrame {
     private DrawPanel drawPanel;
-    private JButton createFigureButton;
     private JMenuBar menuBar;
 
 
@@ -22,7 +23,6 @@ public class MainWindow extends JFrame {
         setJMenuBar(menuBar);
         drawPanel = new DrawPanel();
         add(drawPanel, BorderLayout.CENTER);
-        createFigureButton = new JButton("Add figure");
 
         JMenu figuresMenu = new JMenu("Figures");
         JMenuItem addItem = new JMenuItem("Add");
@@ -41,7 +41,6 @@ public class MainWindow extends JFrame {
             @Override
             public void keyReleased(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_Q) {
-                    System.out.println("Q");
                     List<Figure> figures = getDrawPanel().getFigures();
                     if (figures.size() > 0) {
                         Figure figure = figures.get(figures.size() - 1);
@@ -98,7 +97,7 @@ public class MainWindow extends JFrame {
     }
 
     public static void main(String[] args) throws UnsupportedLookAndFeelException {
-        UIManager.setLookAndFeel(new FlatIntelliJLaf());
+        //   UIManager.setLookAndFeel(new FlatIntelliJLaf());
         new MainWindow();
     }
 

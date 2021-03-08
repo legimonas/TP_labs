@@ -2,7 +2,6 @@ package oneD;
 
 import java.awt.*;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Line extends Ray {
 
@@ -20,9 +19,13 @@ public class Line extends Ray {
         super.draw(g);
         Graphics2D g2d = (Graphics2D) g;
         g2d.setColor(lineColor);
-        List<Point> points = getInRectPointsStream(getUserRect(getHeight(), getWidth())).collect(Collectors.toList());
-        Point first = points.get(0);
-        Point second = points.get(1);
-        g2d.drawLine(first.x, first.y, second.x, second.y);
+        List<Point> points = intersectionPoints(getUserRect(getHeight(), getWidth()), location, getSecondPoint());
+        if (points.size() != 0 && points.size() != 1) {
+            Point first = points.get(0);
+            Point second = points.get(1);
+            if (first != null && second != null) {
+                g2d.drawLine(first.x, first.y, second.x, second.y);
+            }
+        }
     }
 }

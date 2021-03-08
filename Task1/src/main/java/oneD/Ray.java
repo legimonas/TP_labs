@@ -3,7 +3,6 @@ package oneD;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
 
 
 public class Ray extends Section {
@@ -32,7 +31,8 @@ public class Ray extends Section {
     protected Point getSecondPointForDrawing(int height, int weight) {
         List<Point> rectangle = getUserRect(height, weight);
         List<Integer> normal = getNormal(createLine(getLocation(), getSecondPoint()), getLocation());
-        return getInRectPointsStream(rectangle)
+        return intersectionPoints(rectangle, location, getSecondPoint())
+                .stream()
                 .filter(point -> isOneSideLine(normal, getSecondPoint(), point))
                 .findAny()
                 .orElse(null);
@@ -45,13 +45,6 @@ public class Ray extends Section {
         rectangle.add(new Point(weight, height));
         rectangle.add(new Point(0, height));
         return rectangle;
-    }
-
-    protected Stream<Point> getInRectPointsStream(List<Point> rectangle) {
-        return intersectionPoints(rectangle, getLocation(), getSecondPoint())
-                .stream()
-                .filter(point -> pointInRect(rectangle, point))
-                .distinct();
     }
 
 
@@ -129,21 +122,20 @@ public class Ray extends Section {
         return result;
     }
 
-    protected boolean pointInRect(List<Point> rectangle, Point p) {
-        return p.y >= rectangle.get(0).y - EPS
-                && p.y <= rectangle.get(2).y + EPS
-                && p.x >= (rectangle.get(0).x - EPS)
-                && p.x <= rectangle.get(2).x + EPS;
-
-    }
-
     @Override
     public void draw(Graphics g) {
         super.draw(g);
         Graphics2D g2d = (Graphics2D) g;
         g2d.setColor(lineColor);
         Point secondPoint = getSecondPointForDrawing(height, width);
-        g2d.drawLine(location.x, location.y, secondPoint.x, secondPoint.y);
+        if (secondPoint != null) {
+            g2d.drawLine(location.x, location.y, secondPoint.x, secondPoint.y);
+        }
+    }
+
+    @Override
+    public void move(int offsetX, int offsetY) {
+        super.move(offsetX, offsetY);
     }
 
     public int getWidth() {
