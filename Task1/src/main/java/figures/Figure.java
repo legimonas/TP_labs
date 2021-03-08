@@ -62,6 +62,7 @@ public abstract class Figure {
     }
 
     public void move(int offsetX, int offsetY) {
-        location.move(offsetX, offsetY);
+        location.x += offsetX;
+        location.y += offsetY;
     }
 }

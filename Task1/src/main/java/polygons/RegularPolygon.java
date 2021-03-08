@@ -38,7 +38,6 @@ public class RegularPolygon extends Polygon {
         g2d.setColor(getFillColor());
         g2d.fillPolygon(xPositions, yPositions, xPositions.length);
         g2d.setColor(getLineColor());
-        g2d.setStroke(new BasicStroke(STANDARD_STROKE_WIDTH));
         g2d.drawPolygon(xPositions, yPositions, xPositions.length);
 
     }

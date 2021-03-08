@@ -41,7 +41,8 @@ public class Section extends Figure {
     @Override
     public void move(int offsetX, int offsetY) {
         super.move(offsetX, offsetY);
-        secondPoint.move(offsetX, offsetY);
+        secondPoint.x += offsetX;
+        secondPoint.y += offsetY;
     }
 
     public Point getSecondPoint() {

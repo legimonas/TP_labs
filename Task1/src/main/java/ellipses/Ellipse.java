@@ -52,9 +52,11 @@ public class Ellipse extends Figure2D {
 
     @Override
     public void move(int offsetX, int offsetY) {
-        pointA.move(offsetX, offsetY);
-        pointB.move(offsetX, offsetY);
         super.move(offsetX, offsetY);
+        pointA.x += offsetX;
+        pointA.y += offsetY;
+        pointB.x += offsetX;
+        pointB.y += offsetY;
     }
 
     public Point getPointA() {

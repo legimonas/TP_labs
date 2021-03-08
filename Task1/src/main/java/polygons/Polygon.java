@@ -82,8 +82,11 @@ public class Polygon extends Figure2D {
 
     @Override
     public void move(int offsetX, int offsetY) {
-        points.forEach(point -> point.move(offsetX, offsetY));
-        location.move(offsetX, offsetY);
+        super.move(offsetX, offsetY);
+        points.forEach(point -> {
+            point.x += offsetX;
+            point.y += offsetY;
+        });
     }
 
     public void setPoints(List<Point> points) {

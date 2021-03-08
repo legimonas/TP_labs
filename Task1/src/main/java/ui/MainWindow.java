@@ -6,10 +6,7 @@ import figures.Figure;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.awt.event.*;
 import java.util.List;
 
 public class MainWindow extends JFrame {
@@ -42,15 +39,7 @@ public class MainWindow extends JFrame {
 
         setFocusable(true);
         requestFocusInWindow();
-        addKeyListener(new KeyListener() {
-            @Override
-            public void keyTyped(KeyEvent e) {
-            }
-
-            @Override
-            public void keyPressed(KeyEvent e) {
-            }
-
+        addKeyListener(new KeyAdapter() {
             @Override
             public void keyReleased(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_Q) {
@@ -66,6 +55,40 @@ public class MainWindow extends JFrame {
                 }
             }
         });
+
+        addKeyListener(new KeyAdapter() {
+            public void move(int keyCode){
+                List<Figure> figures = getDrawPanel().getFigures();
+                if (figures.size() == 0) return;
+                Figure selectedFigure = figures.get(figures.size()-1);
+                switch (keyCode){
+                    case KeyEvent.VK_LEFT:
+                        selectedFigure.move(-20, 0);
+                        break;
+                    case KeyEvent.VK_UP:
+                        selectedFigure.move(0, -20);
+                        break;
+                    case KeyEvent.VK_RIGHT:
+                        selectedFigure.move(20, 0);
+                        break;
+                    case KeyEvent.VK_DOWN:
+                        selectedFigure.move(0, 20);
+                        break;
+                }
+                drawPanel.repaint();
+            }
+
+            @Override
+            public void keyTyped(KeyEvent e) {
+                move(e.getKeyCode());
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                move(e.getKeyCode());
+            }
+        });
+
         menuBar.add(figuresMenu);
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

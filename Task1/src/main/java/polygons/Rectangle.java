@@ -27,7 +27,6 @@ public class Rectangle extends Polygon {
         g2d.setColor(getFillColor());
         g2d.fillRect(getPointA().x, getPointA().y, getWidth(), getHeight());
         g2d.setColor(getLineColor());
-        g2d.setStroke(new BasicStroke(STANDARD_STROKE_WIDTH));
         g2d.drawRect(getPointA().x, getPointA().y, getWidth(), getHeight());
     }
 
