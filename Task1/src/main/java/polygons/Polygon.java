@@ -54,6 +54,7 @@ public class Polygon extends Figure2D {
 
     @Override
     public void draw(Graphics g) {
+        super.draw(g);
         Graphics2D g2d = (Graphics2D) g;
         points.add(0, location);
         drawPolygon(
@@ -72,7 +73,6 @@ public class Polygon extends Figure2D {
         g2d.setColor(getFillColor());
         g2d.fillPolygon(xPoints, yPoints, xPoints.length);
         g2d.setColor(getLineColor());
-        g2d.setStroke(new BasicStroke(STANDARD_STROKE_WIDTH));
         g2d.drawPolygon(xPoints, yPoints, yPoints.length);
     }
 

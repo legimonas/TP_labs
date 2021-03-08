@@ -32,6 +32,7 @@ public class Section extends Figure {
 
     @Override
     public void draw(Graphics g) {
+        super.draw(g);
         Graphics2D g2d = (Graphics2D) g;
         g2d.setColor(this.lineColor);
         g2d.drawLine(location.x, location.y, secondPoint.x, secondPoint.y);

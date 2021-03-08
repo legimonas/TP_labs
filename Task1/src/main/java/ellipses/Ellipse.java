@@ -42,11 +42,11 @@ public class Ellipse extends Figure2D {
 
     @Override
     public void draw(Graphics g) {
+        super.draw(g);
         Graphics2D g2d = (Graphics2D) g;
         g2d.setColor(getFillColor());
         g2d.fillOval(getPointA().x, getPointA().y, Math.abs(getPointA().x - getPointB().x), Math.abs(getPointA().y - getPointB().y));
         g2d.setColor(getLineColor());
-        g2d.setStroke(new BasicStroke(STANDARD_STROKE_WIDTH));
         g2d.drawOval(getPointA().x, getPointA().y, Math.abs(getPointA().x - getPointB().x), Math.abs(getPointA().y - getPointB().y));
     }
 

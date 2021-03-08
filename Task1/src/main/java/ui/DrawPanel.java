@@ -21,6 +21,8 @@ public class DrawPanel extends JPanel {
     }
     @Override
     protected void paintComponent(Graphics g) {
+        if(figures.size()>0)
+            figures.get(figures.size()-1).setSelected(true);
         super.paintComponent(g);
         g.setColor(Color.WHITE);
         g.fillRect(0, 0, this.getWidth(), this.getHeight());
@@ -28,5 +30,9 @@ public class DrawPanel extends JPanel {
         for(Figure figure : figures){
             figure.draw(g);
         }
+    }
+
+    public List<Figure> getFigures() {
+        return figures;
     }
 }

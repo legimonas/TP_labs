@@ -21,6 +21,7 @@ public class Parallelogram extends Polygon {
 
     @Override
     public void draw(Graphics g) {
+        setStrokeWidth((Graphics2D)g);
         int[][] vertexes = new int[2][4];
         vertexes[0][0] = getPointA().x;
         vertexes[1][0] = getPointA().y;

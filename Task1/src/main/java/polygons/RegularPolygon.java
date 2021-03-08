@@ -25,6 +25,7 @@ public class RegularPolygon extends Polygon {
 
     @Override
     public void draw(Graphics g) {
+        setStrokeWidth((Graphics2D) g);
         double r = (int) Math.sqrt(Math.pow(getCenter().x - getSidePoint().x, 2) + Math.pow(getCenter().y - getSidePoint().y, 2));
         double phi = Math.acos(Math.abs(getSidePoint().x - getCenter().x) / r);
         int[] xPositions = new int[amountOfSides];
