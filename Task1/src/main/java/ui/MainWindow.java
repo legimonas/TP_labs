@@ -16,13 +16,13 @@ public class MainWindow extends JFrame {
 
 
     public MainWindow() {
-        super("lab1");
+        super("Main window");
         setLayout(new BorderLayout());
         menuBar = new JMenuBar();
         setJMenuBar(menuBar);
         drawPanel = new DrawPanel();
         add(drawPanel, BorderLayout.CENTER);
-        createFigureButton = new JButton("add figure");
+        createFigureButton = new JButton("Add figure");
 
         JMenu figuresMenu = new JMenu("Figures");
         JMenuItem addItem = new JMenuItem("Add");
@@ -37,8 +37,6 @@ public class MainWindow extends JFrame {
             }
         });
 
-        setFocusable(true);
-        requestFocusInWindow();
         addKeyListener(new KeyAdapter() {
             @Override
             public void keyReleased(KeyEvent e) {
@@ -57,11 +55,11 @@ public class MainWindow extends JFrame {
         });
 
         addKeyListener(new KeyAdapter() {
-            public void move(int keyCode){
+            public void move(int keyCode) {
                 List<Figure> figures = getDrawPanel().getFigures();
                 if (figures.size() == 0) return;
-                Figure selectedFigure = figures.get(figures.size()-1);
-                switch (keyCode){
+                Figure selectedFigure = figures.get(figures.size() - 1);
+                switch (keyCode) {
                     case KeyEvent.VK_LEFT:
                         selectedFigure.move(-20, 0);
                         break;
@@ -91,10 +89,12 @@ public class MainWindow extends JFrame {
 
         menuBar.add(figuresMenu);
 
+        setFocusable(true);
+        requestFocusInWindow();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 700, 400);
+        setBounds(100, 100, 1000, 600);
+        setResizable(false);
         setVisible(true);
-
     }
 
     public static void main(String[] args) throws UnsupportedLookAndFeelException {
