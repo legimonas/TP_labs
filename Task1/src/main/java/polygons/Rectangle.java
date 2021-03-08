@@ -22,11 +22,11 @@ public class Rectangle extends Polygon {
 
     @Override
     public void draw(Graphics g) {
+        setStrokeWidth((Graphics2D)g);
         Graphics2D g2d = (Graphics2D) g;
         g2d.setColor(getFillColor());
         g2d.fillRect(getPointA().x, getPointA().y, getWidth(), getHeight());
         g2d.setColor(getLineColor());
-        g2d.setStroke(new BasicStroke(STANDARD_STROKE_WIDTH));
         g2d.drawRect(getPointA().x, getPointA().y, getWidth(), getHeight());
     }
 

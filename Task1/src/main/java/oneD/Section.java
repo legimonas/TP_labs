@@ -32,6 +32,7 @@ public class Section extends Figure {
 
     @Override
     public void draw(Graphics g) {
+        super.draw(g);
         Graphics2D g2d = (Graphics2D) g;
         g2d.setColor(this.lineColor);
         g2d.drawLine(location.x, location.y, secondPoint.x, secondPoint.y);
@@ -40,7 +41,8 @@ public class Section extends Figure {
     @Override
     public void move(int offsetX, int offsetY) {
         super.move(offsetX, offsetY);
-        secondPoint.move(offsetX, offsetY);
+        secondPoint.x += offsetX;
+        secondPoint.y += offsetY;
     }
 
     public Point getSecondPoint() {

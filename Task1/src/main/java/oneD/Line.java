@@ -17,6 +17,7 @@ public class Line extends Ray {
 
     @Override
     public void draw(Graphics g) {
+        super.draw(g);
         Graphics2D g2d = (Graphics2D) g;
         g2d.setColor(lineColor);
         List<Point> points = getInRectPointsStream(getUserRect(getHeight(), getWidth())).collect(Collectors.toList());

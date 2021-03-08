@@ -139,6 +139,7 @@ public class Ray extends Section {
 
     @Override
     public void draw(Graphics g) {
+        super.draw(g);
         Graphics2D g2d = (Graphics2D) g;
         g2d.setColor(lineColor);
         Point secondPoint = getSecondPointForDrawing(height, width);
