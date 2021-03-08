@@ -281,14 +281,14 @@ public class CreateFigureDialog extends JDialog {
     }
 
     private void updateButtonsIcons() {
-        BufferedImage borderColorImage = new BufferedImage(15, 15, BufferedImage.TYPE_INT_ARGB);
+        BufferedImage borderColorImage = new BufferedImage(12, 12, BufferedImage.TYPE_INT_ARGB);
         Graphics g = borderColorImage.getGraphics();
         g.setColor(borderColor);
         g.fillRect(0, 0, borderColorImage.getWidth(), borderColorImage.getHeight());
         ImageIcon borderColorButtonIcon = new ImageIcon(borderColorImage);
         borderColorButton.setIcon(borderColorButtonIcon);
 
-        BufferedImage fillColorImage = new BufferedImage(15, 15, BufferedImage.TYPE_INT_ARGB);
+        BufferedImage fillColorImage = new BufferedImage(12, 12, BufferedImage.TYPE_INT_ARGB);
         g = fillColorImage.getGraphics();
         g.setColor(fillColor);
         g.fillRect(0, 0, fillColorImage.getWidth(), fillColorImage.getHeight());
