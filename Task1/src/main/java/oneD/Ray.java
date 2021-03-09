@@ -135,7 +135,8 @@ public class Ray extends Section {
 
     @Override
     public void move(int offsetX, int offsetY) {
-        super.move(offsetX, offsetY);
+        if (location.y + offsetY > 0 && location.y + offsetY < height)
+            super.move(offsetX, offsetY);
     }
 
     public int getWidth() {
