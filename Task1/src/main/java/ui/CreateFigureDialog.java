@@ -17,19 +17,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Objects;
 
 public class CreateFigureDialog extends JDialog {
-    public static final String LINE = "Line";
-    public static final String RAY = "Ray";
-    public static final String SECTION = "Section";
-    public static final String CIRCLE = "Circle";
-    public static final String ELLIPSE = "Ellipse";
-    public static final String POLYGON = "Polygon";
-    public static final String RECTANGLE = "Rectangle";
-    public static final String REGULAR_POLYGON = "Regular Polygon";
-    public static final String RHOMBUS = "Rhombus";
-    public static final String PARALLELOGRAM = "Parallelogram";
+
     private JPanel editPanel;
     private JPanel buttonsPanel;
 
@@ -52,18 +44,9 @@ public class CreateFigureDialog extends JDialog {
         setTitle("Add figure");
         this.parentWindow = parentWindow;
         setModal(true);
-        figuresNames = new String[]{
-                LINE,
-                RAY,
-                SECTION,
-                CIRCLE,
-                ELLIPSE,
-                POLYGON,
-                RECTANGLE,
-                REGULAR_POLYGON,
-                RHOMBUS,
-                PARALLELOGRAM
-        };
+        figuresNames = Arrays.stream(DrawAction.values())
+                .map(Enum::toString)
+                .toArray(size -> new String[size]);
         figuresComboBox = new JComboBox(figuresNames);
         point1TextField = new JTextField();
         point2TextField = new JTextField();
@@ -142,8 +125,9 @@ public class CreateFigureDialog extends JDialog {
 
     private void createChangeEditPanelListener() {
         figuresComboBox.addActionListener(e -> {
+
             String selectedItem = (String) figuresComboBox.getSelectedItem();
-            switch (Objects.requireNonNull(selectedItem)) {
+            switch (DrawAction.valueOf(Objects.requireNonNull(selectedItem))) {
                 case LINE:
                 case RAY:
                 case SECTION:
@@ -195,6 +179,72 @@ public class CreateFigureDialog extends JDialog {
                     break;
 
             }
+
+        });
+    }
+
+
+    private void addCreateFigureEventListener() {
+        addButton.addActionListener(e -> {
+            try {
+                String selectedItem = (String) figuresComboBox.getSelectedItem();
+                Point pointA = new Point();
+                Point pointB = new Point();
+                if (point1TextField.getParent() != null && point2TextField.getParent() != null) {
+                    pointA = getPoint(point1TextField);
+                    pointB = getPoint(point2TextField);
+                }
+                switch (DrawAction.valueOf(Objects.requireNonNull(selectedItem))) {
+                    case LINE:
+                        figure = new Line(pointA, pointB, borderColor);
+                        setRayBounds(figure);
+                        break;
+                    case RAY:
+                        figure = new Ray(pointA, pointB, borderColor);
+                        setRayBounds(figure);
+                        break;
+                    case SECTION:
+                        figure = new Section(pointA, pointB, borderColor);
+                        break;
+                    case CIRCLE:
+                        figure = new Circle(pointA, pointB, borderColor, fillColor);
+                        break;
+                    case ELLIPSE:
+                        figure = new Ellipse(pointA, pointB, borderColor, fillColor);
+                        break;
+                    case RECTANGLE:
+                        figure = new Rectangle(pointA, pointB, borderColor, fillColor);
+                        break;
+                    case POLYGON: {
+                        String pointsString = pointsTextField.getText();
+                        String[] coords = pointsString.split("[ ,]");
+                        ArrayList<Point> points = new ArrayList<>();
+                        for (int i = 0; i < coords.length; i += 2) {
+                            points.add(new Point(Integer.parseInt(coords[i]), Integer.parseInt(coords[i + 1])));
+                        }
+                        figure = new Polygon(points, borderColor, fillColor);
+                        break;
+                    }
+                    case REGULAR_POLYGON: {
+                        int amountOfAges = Integer.parseInt(amountOfAgesTextField.getText());
+                        Point point = getPoint(point1TextField);
+                        Point centerPoint = getPoint(point2TextField);
+                        figure = new RegularPolygon(centerPoint, point, amountOfAges, borderColor, fillColor);
+                        break;
+                    }
+                    case RHOMBUS:
+                        figure = new Rhombus(pointA, pointB, borderColor, fillColor);
+                        break;
+                    case PARALLELOGRAM: {
+                        Point center = getPoint(point3TextField);
+                        figure = new Parallelogram(center, pointA, pointB, borderColor, fillColor);
+                    }
+                }
+            } catch (NumberFormatException exception) {
+                JOptionPane.showMessageDialog(this, "Cant parse value. " +
+                        "Correct style: x,y or in polygon x,y/x,y/...");
+            }
+            dispose();
         });
     }
 
@@ -202,65 +252,6 @@ public class CreateFigureDialog extends JDialog {
         String pointString = pointTextField.getText();
         String[] coords = pointString.split("[ ,]");
         return new Point(Integer.parseInt(coords[0]), Integer.parseInt(coords[1]));
-    }
-
-    private void addCreateFigureEventListener() {
-        addButton.addActionListener(e -> {
-            String selectedItem = (String) figuresComboBox.getSelectedItem();
-            Point pointA = new Point();
-            Point pointB = new Point();
-            if (point1TextField.getParent() != null && point2TextField.getParent() != null) {
-                pointA = getPoint(point1TextField);
-                pointB = getPoint(point2TextField);
-            }
-            switch (Objects.requireNonNull(selectedItem)) {
-                case LINE:
-                    figure = new Line(pointA, pointB, borderColor);
-                    setRayBounds(figure);
-                    break;
-                case RAY:
-                    figure = new Ray(pointA, pointB, borderColor);
-                    setRayBounds(figure);
-                    break;
-                case SECTION:
-                    figure = new Section(pointA, pointB, borderColor);
-                    break;
-                case CIRCLE:
-                    figure = new Circle(pointA, pointB, borderColor, fillColor);
-                    break;
-                case ELLIPSE:
-                    figure = new Ellipse(pointA, pointB, borderColor, fillColor);
-                    break;
-                case RECTANGLE:
-                    figure = new Rectangle(pointA, pointB, borderColor, fillColor);
-                    break;
-                case POLYGON: {
-                    String pointsString = pointsTextField.getText();
-                    String[] coords = pointsString.split("[ ,]");
-                    ArrayList<Point> points = new ArrayList<>();
-                    for (int i = 0; i < coords.length; i += 2) {
-                        points.add(new Point(Integer.parseInt(coords[i]), Integer.parseInt(coords[i + 1])));
-                    }
-                    figure = new Polygon(points, borderColor, fillColor);
-                    break;
-                }
-                case REGULAR_POLYGON: {
-                    int amountOfAges = Integer.parseInt(amountOfAgesTextField.getText());
-                    Point point = getPoint(point1TextField);
-                    Point centerPoint = getPoint(point2TextField);
-                    figure = new RegularPolygon(centerPoint, point, amountOfAges, borderColor, fillColor);
-                    break;
-                }
-                case RHOMBUS:
-                    figure = new Rhombus(pointA, pointB, borderColor, fillColor);
-                    break;
-                case PARALLELOGRAM: {
-                    Point center = getPoint(point3TextField);
-                    figure = new Parallelogram(center, pointA, pointB, borderColor, fillColor);
-                }
-            }
-            dispose();
-        });
     }
 
     private void setRayBounds(Figure figure) {
