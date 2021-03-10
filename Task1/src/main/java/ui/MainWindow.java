@@ -1,7 +1,7 @@
 package ui;
 
-//import com.formdev.flatlaf.FlatIntelliJLaf;
-//import com.formdev.flatlaf.FlatLightLaf;
+import com.formdev.flatlaf.FlatIntelliJLaf;
+import com.formdev.flatlaf.FlatLightLaf;
 
 import figures.Figure;
 
@@ -97,7 +97,7 @@ public class MainWindow extends JFrame {
     }
 
     public static void main(String[] args) throws UnsupportedLookAndFeelException {
-        //   UIManager.setLookAndFeel(new FlatIntelliJLaf());
+        UIManager.setLookAndFeel(new FlatIntelliJLaf());
         new MainWindow();
     }
 
