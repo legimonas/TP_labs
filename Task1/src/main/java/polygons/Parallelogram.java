@@ -41,12 +41,6 @@ public class Parallelogram extends Polygon {
         drawPolygon((Graphics2D) g, vertexes[0], vertexes[1]);
     }
 
-
-    private int getDy(Point point) {
-        return Math.abs(getPointCenter().y - point.y);
-    }
-
-
     private Point getPointCenter() {
         return location;
     }
