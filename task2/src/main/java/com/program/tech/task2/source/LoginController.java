@@ -29,7 +29,7 @@ public class LoginController {
         Optional<User> userOptional = loginDao.findByPasswordAndLogin(loginForm.getPassword(), loginForm.getLogin());
         if (userOptional.isPresent()) {
             model.addAttribute("user", userOptional.get());
-            return "welcome-page";
+            return userOptional.get().getRole() + "Main";
         }
         attributes.addFlashAttribute("error", "Неправильный номер или пароль");
         return "redirect:login";
