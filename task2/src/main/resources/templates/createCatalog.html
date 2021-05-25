@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create catalog</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+            crossorigin="anonymous"></script>
+    <script
+            src="https://code.jquery.com/jquery-3.6.0.js"
+            integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+            crossorigin="anonymous"></script>
+</head>
+
+<nav class="navbar navbar-light bg-light">
+
+    <a class="navbar-brand" href="/phoneshop-web/productList">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-phone"
+             viewBox="0 0 16 16">
+            <path d="M11 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h6zM5 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H5z"></path>
+            <path d="M8 14a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"></path>
+        </svg>
+        Phonify
+    </a>
+    <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+            <div class="btn-group" role="group">
+                <a href="/phoneshop-web/cart" class="btn btn-primary">Cart</a>
+                <button id="quantity" type="button" class="btn btn-primary" disabled>
+                    Quantity: 0 </button>
+                <button id="price" type="button" class="btn btn-primary" disabled>Price: 0 $</button>
+            </div>
+        </li>
+    </ul>
+
+
+    <ul class="navbar-nav">
+
+        <li class="nav-item">
+            <a href="/phoneshop-web/login" class="nav-link me-4">Login</a>
+        </li>
+
+
+    </ul>
+</nav>
+
+
+<div class="container">
+    <div class="mb-3 row"></div>
+    <form class="d-flex">
+        <input class="form-control me-2" name="query" value="" type="search" placeholder="Search"
+               aria-label="Search">
+        <input type="hidden" name="sort" value="">
+        <input type="hidden" name="order" value="">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+    </form>
+</div>
+
+
+<div class="container">
+    <table class="table table-bordered border-primary align-middle caption-top">
+        <caption>Found 7272 phones.</caption>
+        <thead>
+        <tr>
+            <td>Image</td>
+            <td>Brand
+                <a href="?sort=BRAND&order=ASC&query="
+                   style="text-decoration: none; ">
+                    &uarr;</a>
+
+
+                <a href="?sort=BRAND&order=DESC&query="
+                   style="text-decoration: none; ">
+                    &darr;</a>
+
+
+            </td>
+            <td>Model
+                <a href="?sort=MODEL&order=ASC&query="
+                   style="text-decoration: none; ">
+                    &uarr;</a>
+
+
+                <a href="?sort=MODEL&order=DESC&query="
+                   style="text-decoration: none; ">
+                    &darr;</a>
+
+
+            </td>
+            <td>Colors</td>
+            <td>Display size
+                <a href="?sort=displaySizeInches&order=ASC&query="
+                   style="text-decoration: none; ">
+                    &uarr;</a>
+
+
+                <a href="?sort=displaySizeInches&order=DESC&query="
+                   style="text-decoration: none; ">
+                    &darr;</a>
+
+
+            </td>
+            <td>Price
+                <a href="?sort=PRICE&order=ASC&query="
+                   style="text-decoration: none; ">
+                    &uarr;</a>
+
+
+                <a href="?sort=PRICE&order=DESC&query="
+                   style="text-decoration: none; ">
+                    &darr;</a>
+
+            </td>
+            <td>
+                Quantity
+            </td>
+            <td>
+                Add to
+            </td>
+        </tr>
+        </thead>
+
+        <tr>
+            <td>
+                <img height="150px" width="150px" class="img-thumbnail"
+                     src="https://raw.githubusercontent.com/andrewosipenko/phoneshop-ext-images/master/manufacturer/ARCHOS/ARCHOS 101 Helium 4G.jpg">
+            </td>
+            <td>ARCHOS</td>
+            <td><a href="/phoneshop-web/productDetails/1001">ARCHOS 101 Helium 4G</a>
+            </td>
+            <td>
+                White
+            </td>
+            <td>10.1"</td>
+            <td>$ </td>
+            <td id="1001"><input value="1" class="form-control" id="1001" type="text"/></td>
+            <td>
+                <button class="btn btn-outline-success" id="1001">Add to</button>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <img height="150px" width="150px" class="img-thumbnail"
+                     src="https://raw.githubusercontent.com/andrewosipenko/phoneshop-ext-images/master/manufacturer/ARCHOS/ARCHOS 101 Internet Tablet.jpg">
+            </td>
+            <td>ARCHOS</td>
+            <td><a href="/phoneshop-web/productDetails/1002">ARCHOS 101 Internet Tablet</a>
+            </td>
+            <td>
+                Black
+            </td>
+            <td>10.1"</td>
+            <td>$ </td>
+            <td id="1002"><input value="1" class="form-control" id="1002" type="text"/></td>
+            <td>
+                <button class="btn btn-outline-success" id="1002">Add to</button>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <img height="150px" width="150px" class="img-thumbnail"
+                     src="https://raw.githubusercontent.com/andrewosipenko/phoneshop-ext-images/master/manufacturer/ARCHOS/ARCHOS 101 Oxygen.jpg">
+            </td>
+            <td>ARCHOS</td>
+            <td><a href="/phoneshop-web/productDetails/1003">ARCHOS 101 Oxygen</a>
+            </td>
+            <td></td>
+            <td>10.1"</td>
+            <td>$ 249.0</td>
+            <td id="1003"><input value="1" class="form-control" id="1003" type="text"/></td>
+            <td>
+                <button class="btn btn-outline-success" id="1003">Add to</button>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <img height="150px" width="150px" class="img-thumbnail"
+                     src="https://raw.githubusercontent.com/andrewosipenko/phoneshop-ext-images/master/manufacturer/ARCHOS/ARCHOS 101 Saphir.jpg">
+            </td>
+            <td>ARCHOS</td>
+            <td><a href="/phoneshop-web/productDetails/1004">ARCHOS 101 Saphir</a>
+            </td>
+            <td></td>
+            <td>10.1"</td>
+            <td>$ </td>
+            <td id="1004"><input value="1" class="form-control" id="1004" type="text"/></td>
+            <td>
+                <button class="btn btn-outline-success" id="1004">Add to</button>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <img height="150px" width="150px" class="img-thumbnail"
+                     src="https://raw.githubusercontent.com/andrewosipenko/phoneshop-ext-images/master/manufacturer/ARCHOS/ARCHOS 101 Titanium.jpg">
+            </td>
+            <td>ARCHOS</td>
+            <td><a href="/phoneshop-web/productDetails/1005">ARCHOS 101 Titanium</a>
+            </td>
+            <td></td>
+            <td>10.1"</td>
+            <td>$ </td>
+            <td id="1005"><input value="1" class="form-control" id="1005" type="text"/></td>
+            <td>
+                <button class="btn btn-outline-success" id="1005">Add to</button>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <img height="150px" width="150px" class="img-thumbnail"
+                     src="https://raw.githubusercontent.com/andrewosipenko/phoneshop-ext-images/master/manufacturer/ARCHOS/ARCHOS 101 XS 2.jpg">
+            </td>
+            <td>ARCHOS</td>
+            <td><a href="/phoneshop-web/productDetails/1006">ARCHOS 101 XS 2</a>
+            </td>
+            <td>
+                White
+            </td>
+            <td>10.1"</td>
+            <td>$ 270.0</td>
+            <td id="1006"><input value="1" class="form-control" id="1006" type="text"/></td>
+            <td>
+                <button class="btn btn-outline-success" id="1006">Add to</button>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <img height="150px" width="150px" class="img-thumbnail"
+                     src="https://raw.githubusercontent.com/andrewosipenko/phoneshop-ext-images/master/manufacturer/ARCHOS/ARCHOS 101 XS.jpg">
+            </td>
+            <td>ARCHOS</td>
+            <td><a href="/phoneshop-web/productDetails/1007">ARCHOS 101 XS</a>
+            </td>
+            <td></td>
+            <td>10.1"</td>
+            <td>$ </td>
+            <td id="1007"><input value="1" class="form-control" id="1007" type="text"/></td>
+            <td>
+                <button class="btn btn-outline-success" id="1007">Add to</button>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <img height="150px" width="150px" class="img-thumbnail"
+                     src="https://raw.githubusercontent.com/andrewosipenko/phoneshop-ext-images/master/manufacturer/ARCHOS/ARCHOS 101 neon.jpg">
+            </td>
+            <td>ARCHOS</td>
+            <td><a href="/phoneshop-web/productDetails/1008">ARCHOS 101 neon</a>
+            </td>
+            <td></td>
+            <td>10.1"</td>
+            <td>$ </td>
+            <td id="1008"><input value="1" class="form-control" id="1008" type="text"/></td>
+            <td>
+                <button class="btn btn-outline-success" id="1008">Add to</button>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <img height="150px" width="150px" class="img-thumbnail"
+                     src="https://raw.githubusercontent.com/andrewosipenko/phoneshop-ext-images/master/manufacturer/ARCHOS/ARCHOS 28 Internet Tablet.jpg">
+            </td>
+            <td>ARCHOS</td>
+            <td><a href="/phoneshop-web/productDetails/1009">ARCHOS 28 Internet Tablet</a>
+            </td>
+            <td>
+                Black
+            </td>
+            <td>2.8"</td>
+            <td>$ </td>
+            <td id="1009"><input value="1" class="form-control" id="1009" type="text"/></td>
+            <td>
+                <button class="btn btn-outline-success" id="1009">Add to</button>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <img height="150px" width="150px" class="img-thumbnail"
+                     src="https://raw.githubusercontent.com/andrewosipenko/phoneshop-ext-images/master/manufacturer/ARCHOS/ARCHOS 32 Internet Tablet.jpg">
+            </td>
+            <td>ARCHOS</td>
+            <td><a href="/phoneshop-web/productDetails/1010">ARCHOS 32 Internet Tablet</a>
+            </td>
+            <td>
+                Black
+            </td>
+            <td>3.2"</td>
+            <td>$ </td>
+            <td id="1010"><input value="1" class="form-control" id="1010" type="text"/></td>
+            <td>
+                <button class="btn btn-outline-success" id="1010">Add to</button>
+            </td>
+        </tr>
+
+    </table>
+</div>
+<nav aria-label="Page navigation example">
+    <ul id="pag-list" class="pagination justify-content-center">
+        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+    </ul>
+</nav>
+
+<body>
+
+</body>
+</html>
