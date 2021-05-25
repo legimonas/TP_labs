@@ -10,33 +10,35 @@
             crossorigin="anonymous"></script>
 </head>
 <body>
-<nav class="navbar navbar-light bg-light">
-    <a class="navbar-brand text-center" href="#">
-        Authorization
-    </a>
+<nav class="navbar navbar-light bg-light text-center ">
+    <div class="container-fluid">
+        <a class=" mx-auto navbar-brand" href="#">Authorization</a>
+    </div>
 </nav>
 
 <div class="container">
-    <div class="col-4"></div>
-    <div class="col-5">
-        <div class="row" th:if="${error}">
-            <p class="text-center text-danger" th:text="${error}"></p>
+    <div class="row">
+        <div class="col-4"></div>
+        <div class="col-4">
+            <div class="row" th:if="${error}">
+                <p class="text-center text-danger" th:text="${error}"></p>
+            </div>
+            <div class="row">
+                <form method="post">
+                    <label for="login">
+                        Login:
+                    </label>
+                    <input class="form-control" id="login" name="login">
+                    <label for="password">
+                        Password:
+                    </label>
+                    <input class="form-control" id="password" type="password" name="password">
+                    <button type="submit" class="btn btn-primary mt-1">Log in</button>
+                </form>
+            </div>
         </div>
-        <div class="row">
-            <form method="post">
-                <label for="login">
-                    Username:
-                </label>
-                <input class="form-control" id="login" name="login">
-                <label for="password">
-                    Password:
-                </label>
-                <input class="form-control" id="password" type="password" name="password">
-                <button type="submit" class="btn btn-primary mt-1">Log in</button>
-            </form>
-        </div>
+        <div class="col-4"></div>
     </div>
-    <div class="col-3"></div>
 </div>
 </body>
 </html>

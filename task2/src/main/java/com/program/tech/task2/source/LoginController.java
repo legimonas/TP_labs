@@ -29,11 +29,12 @@ public class LoginController {
         user.setPassword(loginForm.getPassword());
         user.setLogin(loginForm.getLogin());
         if (loginDao.existUser(user)) {
+            model.addAttribute("user", user);
             loginDao.getRole(user);
             String view = checkRole(user.getRole());
             return view;
         }
-        attributes.addFlashAttribute("error", "Неправильный номер или пароль");
+        attributes.addFlashAttribute("error", "Wrong username or password");
         return "redirect:login";
     }
 
